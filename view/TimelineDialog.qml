@@ -6,7 +6,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "TimeLinePopulate.js" as Timeline
+import "../controller/TimeLinePopulate.js" as Timeline
 
 // Use an item as container to group both the overlay and the dialog
 // I do this because the overlay itself has an opacity set, and otherwise
