@@ -5,6 +5,8 @@ import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
+import "."
+import "TimeLinePopulate.js" as Timeline
 
 // Use an item as container to group both the overlay and the dialog
 // I do this because the overlay itself has an opacity set, and otherwise
@@ -14,6 +16,12 @@ import QtQuick.Dialogs 1.1
 Item {
     id: dialogComponent
     anchors.fill: parent
+
+//    property alias timelineArrayProperty: parent.timelineArrayProperty
+    Component.onCompleted: {
+        console.log(timelineArrayProperty);
+
+    }
 
     // Add a simple animation to fade in the popup
     // let the opacity go from 0 to 1 in 400ms
@@ -32,6 +40,8 @@ Item {
         // the dialog window will not do anything
         MouseArea {
             anchors.fill: parent
+
+            onClicked: dialogComponent.destroy()
         }
     }
     Rectangle{
@@ -55,20 +65,30 @@ Item {
                     TextField {
                         id: startDate1
                         y: 10
-                        placeholderText: qsTr("Start Date : dd/mm/yyyy")
-//                        validator: RegExpValidator { regExp:
-//                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
+                        placeholderText: qsTr("dd/mm/yyyy")
+                        //                        validator: RegExpValidator { regExp:
+                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
                     }
 
                     TextField {
                         id: endDate1
                         y: 40
                         placeholderText: qsTr("dd/mm/yyyy")
-//                        validator: RegExpValidator { regExp:
-//                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
+                        //                        validator: RegExpValidator { regExp:
+                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
 
                     }
+                    Button {
+                        id: button1
+                        anchors.centerIn: parent
+                        buttonLabel: "OK"
+                        onButtonClick: {
+                            Timeline.populate(startDate1.text,endDate1.text,"");
+                            dialogComponent.destroy()
+                        }
+                    }
                 }
+
             }
 
             Component {
@@ -80,15 +100,23 @@ Item {
                         id: startDate2
                         y: 10
                         placeholderText: qsTr("dd/mm/yyyy")
-//                        validator: RegExpValidator { regExp:
-//                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
-
+                        //                        validator: RegExpValidator { regExp:
+                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
                     }
 
                     TextField {
                         id: period2
                         y: 40
                         placeholderText: qsTr("No. of years")
+                    }
+                    Button {
+                        id: button2
+                        anchors.centerIn: parent
+                        buttonLabel: "OK"
+                        onButtonClick: {
+                            Timeline.populate(startDate2.text,"",period2.text);
+                            dialogComponent.destroy()
+                        }
                     }
                 }
             }
@@ -107,8 +135,17 @@ Item {
                         id: endDate3
                         y: 40
                         placeholderText: qsTr("dd/mm/yyyy")
-//                        validator: RegExpValidator { regExp:
-//                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
+                        //                        validator: RegExpValidator { regExp:
+                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
+                    }
+                    Button {
+                        id: button3
+                        anchors.centerIn: parent
+                        buttonLabel: "OK"
+                        onButtonClick: {
+                            Timeline.populate("",endDate3.text,period3.text);
+                            dialogComponent.destroy()
+                        }
                     }
                 }
             }
