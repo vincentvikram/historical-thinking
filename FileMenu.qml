@@ -39,6 +39,17 @@ Item{
                 }
             }
         }
+        Menu {
+            title: "People"
+            MenuItem {
+                text: qsTr("New")
+                shortcut: "Ctrl+P"
+                onTriggered: {
+                    var event = Qt.createComponent("People.qml").createObject(historyWindow, {});
+                    eventArray.push(event);
+                }
+            }
+        }
 //    }
 
     TimelineDialog{

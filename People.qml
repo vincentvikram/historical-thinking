@@ -21,7 +21,7 @@ Column{
 
                 Text{
                     id:imageText
-                    text: "Click to add \n an image"
+                    text: "Click to add \n an image \n of the person!"
                 }
             }
             MouseArea{
@@ -37,7 +37,7 @@ Column{
             id:description
             width:100
             height:100
-            placeholderText: qsTr("Describe the\n event")
+            placeholderText: qsTr("Describe the\n person")
         }
     }
 
@@ -45,7 +45,7 @@ Column{
         id:label
         width:200
         height:50
-        placeholderText: qsTr("Event name")
+        placeholderText: qsTr("Person's name goes here :)")
 
     }
 
