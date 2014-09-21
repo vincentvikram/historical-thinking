@@ -19,7 +19,6 @@ Item {
 
     property variant timelineArray:[]
 
-
     // Add a simple animation to fade in the popup
     // let the opacity go from 0 to 1 in 400ms
     PropertyAnimation { target: dialogComponent; property: "opacity";
@@ -47,116 +46,62 @@ Item {
         }
     }
     Rectangle{
-        anchors.centerIn: parent
-        TabView {
-            width: 360
-            height: 360
-            anchors.centerIn: parent
+        anchors.centerIn: overlay
+        color: "white"
 
-            Component.onCompleted: {
-                addTab("Start year/End year", tab1)
-                addTab("Start Date/Period", tab2)
-                addTab("Period/End Date", tab3)
-            }
+        Column{
+            Row{
+                ExclusiveGroup{id:startDateRadioButtons}
+                TextField{
+                    id:startDate
+                    placeholderText: qsTr("Start Date");
 
-            Component {
-                id: tab1
-                Rectangle {
-                    color: "white";
 
-                    TextField {
-                        id: startDate1
-                        y: 10
-                        placeholderText: qsTr("From")
-                        //                        validator: RegExpValidator { regExp:
-                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
-                    }
-
-                    TextField {
-                        id: endDate1
-                        y: 40
-                        placeholderText: qsTr("To")
-                        //                        validator: RegExpValidator { regExp:
-                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
-
-                    }
-                    Button {
-                        id: button1
-                        anchors.centerIn: parent
-                        buttonLabel: "OK"
-                        onButtonClick: {
-                            Timeline.populate(timelineArray,startDate1.text,endDate1.text,"");
-                            dialogComponent.visible = false;
-                            startDate1.text ="";
-                            endDate1.text="";
-                        }
-                    }
                 }
-
-            }
-
-            Component {
-                id: tab2
-                Rectangle {
-                    color: "white"
-
-                    TextField {
-                        id: startDate2
-                        y: 10
-                        placeholderText: qsTr("From")
-                        //                        validator: RegExpValidator { regExp:
-                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
-                    }
-
-                    TextField {
-                        id: period2
-                        y: 40
-                        placeholderText: qsTr("Time period")
-                    }
-                    Button {
-                        id: button2
-                        anchors.centerIn: parent
-                        buttonLabel: "OK"
-                        onButtonClick: {
-                            Timeline.populate(timelineArray,startDate2.text,"",period2.text);
-                            dialogComponent.visible = false;
-                            startDate2.text = "";
-                            period2.text="";
-                        }
-                    }
+                RadioButton{
+                    id:adStartDate
+                    checked:true
+                    text:"A.D/C.E"
+                    exclusiveGroup: startDateRadioButtons
+                }
+                RadioButton{
+                    id:bcStartDate
+                    text:"B.C/B.C.E"
+                    exclusiveGroup: startDateRadioButtons
                 }
             }
-            Component {
-                id: tab3
-                Rectangle {
-                    color: "white"
+            Row{
+                ExclusiveGroup{id:endDateRadioButtons}
+                TextField{
+                    id:endDate
+                    placeholderText: qsTr("Start Date");
 
-                    TextField {
-                        id: period3
-                        y: 10
-                        placeholderText: qsTr("Time period")
-                    }
 
-                    TextField {
-                        id: endDate3
-                        y: 40
-                        placeholderText: qsTr("To")
-                        //                        validator: RegExpValidator { regExp:
-                        //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
-                    }
-                    Button {
-                        id: button3
-                        anchors.centerIn: parent
-                        buttonLabel: "OK"
-                        onButtonClick: {
-                            Timeline.populate(timelineArray, "",endDate3.text,period3.text);
-                            dialogComponent.visible = false;
-                            endDate3.text= "";
-                            period3.text="";
-                        }
-                    }
                 }
+                RadioButton{
+                    id:adEndDate
+                    checked:true
+                    text:"A.D/C.E"
+                    exclusiveGroup: endDateRadioButtons
+                }
+                RadioButton{
+                    id:bcEndDate
+                    text:"B.C/B.C.E"
+                    exclusiveGroup: endDateRadioButtons
+                }
+            }
+            TextField{
+                id:period
+                placeholderText: qsTr("Time Period")
+            }
+
+            Button{
+                id:ok
+
+                onButtonClick:
+                    Timeline.populate(timelineArray,startDate.text,endDate.text,period.text,adStartDate.checked,bcStartDate.checked, adEndDate.checked,bcEndDate.checked);
             }
         }
     }
 }
+

@@ -1,5 +1,13 @@
 import QtQuick 2.0
 
+Item{
+    id:timelineParent
+    property string startDateProperty
+    property string endDateProperty
+    property string timePeriodProperty
+    property int placementY: 600
+    property int  placementX: 50
+    property int timelineNumber
 Rectangle {
     id:timeline
     width: 800
@@ -9,11 +17,6 @@ Rectangle {
 
     color:'black'
 
-    property string startDateProperty
-    property string endDateProperty
-    property string timePeriodProperty
-    property int placementY: 600
-    property int  placementX: 50
 
 
     Text {
@@ -32,4 +35,5 @@ Rectangle {
         x:timeline.width/2
         text: timePeriodProperty
     }
+}
 }
