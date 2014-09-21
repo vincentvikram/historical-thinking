@@ -2,10 +2,12 @@ import QtQuick 2.0
 
 Item{
     id:timelineParent
-    property string startDateProperty
-    property string endDateProperty
+    property string startDateText
+    property string endDateText
+    property variant startDateProperty
+    property variant endDateProperty
     property string timePeriodProperty
-    property int placementY: 600
+    property int placementY: 100
     property int  placementX: 50
     property int timelineNumber
 Rectangle {
@@ -21,13 +23,13 @@ Rectangle {
 
     Text {
         id: startDate
-        text: startDateProperty
+        text: startDateText
     }
 
     Text {
         id: endDate
         x:timeline.width - 50
-        text: endDateProperty
+        text: endDateText
     }
 
     Text {

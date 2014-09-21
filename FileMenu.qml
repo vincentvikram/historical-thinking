@@ -19,7 +19,11 @@ Item{
     }
 
 //    MenuBar{
+    Menu{
+        id:rightClickMenu
+        title: "Add"
 
+        visible:false
         Menu {
             title: "Timeline"
             MenuItem {
@@ -50,11 +54,24 @@ Item{
                 }
             }
         }
-//    }
+
+    }
 
     TimelineDialog{
         id:timelineDialog
         visible:false
+    }
+
+    MouseArea{
+        anchors.fill:historyWindow
+
+//        acceptedButtons: Qt.RightButton
+
+        onClicked:{
+            rightClickMenu.visible = true;
+
+        }
+
     }
 
 }

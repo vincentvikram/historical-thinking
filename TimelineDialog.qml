@@ -37,26 +37,41 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {dialogComponent.visible = false;
-                startDate1.text ="";
-                startDate2.text = "";
-                endDate1.text="";
-                endDate3.text= "";
-                period2.text="";
-                period3.text="";}
+                startDateDate.text ="";
+                startDateMonth.text = "";
+                startDateYear.text = "";
+                endDateDate.text="";
+                endDateMonth.text= "";
+                endDateYear.text= "";
+                period.text = "";
+                }
         }
     }
     Rectangle{
-        anchors.centerIn: overlay
+
         color: "white"
 
         Column{
             Row{
                 ExclusiveGroup{id:startDateRadioButtons}
+
+                Text{
+                    text: "Start Date  "
+                }
                 TextField{
-                    id:startDate
-                    placeholderText: qsTr("Start Date");
-
-
+                    id:startDateDate
+                    placeholderText: qsTr("01");
+                    maximumLength:2
+                }
+                TextField{
+                    id:startDateMonth
+                    placeholderText: qsTr("Jan")
+                    maximumLength:3
+                }
+                TextField{
+                    id:startDateYear
+                    placeholderText: qsTr("yyyy")
+                    maximumLength:4
                 }
                 RadioButton{
                     id:adStartDate
@@ -71,13 +86,27 @@ Item {
                 }
             }
             Row{
+                Text{
+                    text: "End Date    "
+                }
+
                 ExclusiveGroup{id:endDateRadioButtons}
                 TextField{
-                    id:endDate
-                    placeholderText: qsTr("Start Date");
-
-
+                    id:endDateDate
+                    placeholderText: qsTr("01");
+                    maximumLength:2
                 }
+                TextField{
+                    id:endDateMonth
+                    placeholderText: qsTr("Jan")
+                    maximumLength:3
+                }
+                TextField{
+                    id:endDateYear
+                    placeholderText: qsTr("yyyy")
+                    maximumLength: 4
+                }
+
                 RadioButton{
                     id:adEndDate
                     checked:true
@@ -90,16 +119,29 @@ Item {
                     exclusiveGroup: endDateRadioButtons
                 }
             }
-            TextField{
-                id:period
-                placeholderText: qsTr("Time Period")
+            Row{
+                Text{
+                    text:"Time period"
+                }
+
+                TextField{
+
+                    id:period
+                    placeholderText: qsTr("Time Period")
+                }
             }
 
             Button{
                 id:ok
 
                 onButtonClick:
-                    Timeline.populate(timelineArray,startDate.text,endDate.text,period.text,adStartDate.checked,bcStartDate.checked, adEndDate.checked,bcEndDate.checked);
+                {    Timeline.populate(timelineArray,startDateDate.text,startDateMonth.text,
+                                       startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text,
+                                       period.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
+                                       bcEndDate.checked);
+                    dialogComponent.visible = false;
+                }
+
             }
         }
     }
