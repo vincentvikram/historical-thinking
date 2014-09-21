@@ -4,14 +4,16 @@ Rectangle {
     id:timeline
     width: 800
     height: 2
-    y:600
-    x:50
+    y:placementY
+    x:placementX
 
     color:'black'
 
     property string startDateProperty
     property string endDateProperty
     property string timePeriodProperty
+    property int placementY: 600
+    property int  placementX: 50
 
 
     Text {

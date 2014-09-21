@@ -17,11 +17,8 @@ Item {
     id: dialogComponent
     anchors.fill: parent
 
-//    property alias timelineArrayProperty: parent.timelineArrayProperty
-    Component.onCompleted: {
-        console.log(timelineArrayProperty);
+    property variant timelineArray:[]
 
-    }
 
     // Add a simple animation to fade in the popup
     // let the opacity go from 0 to 1 in 400ms
@@ -40,8 +37,13 @@ Item {
         // the dialog window will not do anything
         MouseArea {
             anchors.fill: parent
-
-            onClicked: dialogComponent.destroy()
+            onClicked: {dialogComponent.visible = false;
+                startDate1.text ="";
+                startDate2.text = "";
+                endDate1.text="";
+                endDate3.text= "";
+                period2.text="";
+                period3.text="";}
         }
     }
     Rectangle{
@@ -52,7 +54,7 @@ Item {
             anchors.centerIn: parent
 
             Component.onCompleted: {
-                addTab("Start Date/End Date", tab1)
+                addTab("Start year/End year", tab1)
                 addTab("Start Date/Period", tab2)
                 addTab("Period/End Date", tab3)
             }
@@ -65,7 +67,7 @@ Item {
                     TextField {
                         id: startDate1
                         y: 10
-                        placeholderText: qsTr("dd/mm/yyyy")
+                        placeholderText: qsTr("From")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
                     }
@@ -73,7 +75,7 @@ Item {
                     TextField {
                         id: endDate1
                         y: 40
-                        placeholderText: qsTr("dd/mm/yyyy")
+                        placeholderText: qsTr("To")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
 
@@ -83,8 +85,10 @@ Item {
                         anchors.centerIn: parent
                         buttonLabel: "OK"
                         onButtonClick: {
-                            Timeline.populate(startDate1.text,endDate1.text,"");
-                            dialogComponent.destroy()
+                            Timeline.populate(timelineArray,startDate1.text,endDate1.text,"");
+                            dialogComponent.visible = false;
+                            startDate1.text ="";
+                            endDate1.text="";
                         }
                     }
                 }
@@ -99,7 +103,7 @@ Item {
                     TextField {
                         id: startDate2
                         y: 10
-                        placeholderText: qsTr("dd/mm/yyyy")
+                        placeholderText: qsTr("From")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
                     }
@@ -107,15 +111,17 @@ Item {
                     TextField {
                         id: period2
                         y: 40
-                        placeholderText: qsTr("No. of years")
+                        placeholderText: qsTr("Time period")
                     }
                     Button {
                         id: button2
                         anchors.centerIn: parent
                         buttonLabel: "OK"
                         onButtonClick: {
-                            Timeline.populate(startDate2.text,"",period2.text);
-                            dialogComponent.destroy()
+                            Timeline.populate(timelineArray,startDate2.text,"",period2.text);
+                            dialogComponent.visible = false;
+                            startDate2.text = "";
+                            period2.text="";
                         }
                     }
                 }
@@ -128,13 +134,13 @@ Item {
                     TextField {
                         id: period3
                         y: 10
-                        placeholderText: qsTr("No of years")
+                        placeholderText: qsTr("Time period")
                     }
 
                     TextField {
                         id: endDate3
                         y: 40
-                        placeholderText: qsTr("dd/mm/yyyy")
+                        placeholderText: qsTr("To")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
                     }
@@ -143,8 +149,10 @@ Item {
                         anchors.centerIn: parent
                         buttonLabel: "OK"
                         onButtonClick: {
-                            Timeline.populate("",endDate3.text,period3.text);
-                            dialogComponent.destroy()
+                            Timeline.populate(timelineArray, "",endDate3.text,period3.text);
+                            dialogComponent.visible = false;
+                            endDate3.text= "";
+                            period3.text="";
                         }
                     }
                 }

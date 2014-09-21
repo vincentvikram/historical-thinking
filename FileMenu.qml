@@ -10,6 +10,8 @@ ApplicationWindow{
     height:800
 
     property variant eventArray:[]
+    property variant timelineArray:[]
+
     menuBar:   MenuBar{
 
         Menu {
@@ -17,7 +19,7 @@ ApplicationWindow{
             MenuItem {
                 text: qsTr("New")
                 shortcut: "Ctrl+T"
-                onTriggered: Qt.createComponent("TimelineDialog.qml").createObject(historyWindow, {});
+                onTriggered: {timelineDialog.visible = true;console.log(timelineDialog.timelineArray[0])}
             }
         }
         Menu {
@@ -31,6 +33,11 @@ ApplicationWindow{
                     }
             }
         }
+    }
+
+    TimelineDialog{
+        id:timelineDialog
+        visible:false
     }
 
 }

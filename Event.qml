@@ -10,65 +10,55 @@ Column{
     y:400
     x:50
 
-    Rectangle{
-        width:500
-        height:100
-        Image{
-            id:image
-            width:500
+    Row{
+        Rectangle{
+            width:100
             height:100
-        }
-        MouseArea{
+            Image{
+                id:image
+                width:200
+                height:100
 
-
-            drag.target:event
-            drag.axis: Drag.XandYAxis
-
-            anchors.fill:parent
-            onClicked:{
-                fileDialog.open();
+                Text{
+                    id:imageText
+                    text: "Click to add\n image"
+                }
             }
+            MouseArea{
+
+                anchors.fill:parent
+                onClicked:{
+                    fileDialog.open();
+                }
+            }
+        }
+
+        TextField{
+            id:description
+            width:100
+            height:100
+            placeholderText: qsTr("Describe the\n event")
         }
     }
 
     TextField{
         id:label
-        width:500
+        width:200
         height:50
         placeholderText: qsTr("Event name")
 
-
-        MouseArea{
-            drag.target:event
-            drag.axis: Drag.XandYAxis
-            anchors.fill:parent
-        }
-
     }
 
-    TextField{
-        id:description
-        width:500
-        height:50
-        placeholderText: qsTr("Describe the event")
-
-        MouseArea{
-            drag.target:event
-            drag.axis: Drag.XandYAxis
-            anchors.fill:parent
-        }
-    }
 
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
         selectMultiple: false
         onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrls);
             image.source = fileDialog.fileUrl;
+            imageText.visible = false;
         }
         onRejected: {
-            console.log("Canceled");
             fileDialog.close();
         }
     }
