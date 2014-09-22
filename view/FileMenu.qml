@@ -31,6 +31,16 @@ ApplicationWindow{
                     }
             }
         }
-    }
+            Menu {
+                title: qsTr("Lines")
+                MenuItem {
+                    text: qsTr("D")
+                    shortcut: "Ctrl+L"
+                     onTriggered: Qt.createComponent("lines.qml").createObject(historyWindow, {});
 
+                }
+
+
+    }
+}
 }
