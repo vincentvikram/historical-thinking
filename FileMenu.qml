@@ -3,7 +3,72 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 
-Item{
+//new code for Menu Bar by Abhi
+ApplicationWindow{
+    id:historyWindow
+    title:qsTr("Historical Thinking Skills");
+    width:1024
+    height:800
+
+    property variant eventArray:[]
+    menuBar:   MenuBar{
+
+        Menu {
+            title: qsTr("New")
+            MenuItem {
+                text: qsTr("Timeline")
+                shortcut: "Ctrl+T"
+                onTriggered: {timelineDialog.visible = true;}
+            }            
+            MenuItem {
+                text: qsTr("People")
+                shortcut: "Ctrl+P"
+                onTriggered: {
+                    var event = Qt.createComponent("People.qml").createObject(historyWindow, {});
+                    eventArray.push(event);
+                    }
+                }
+            MenuItem {
+                text: qsTr("Event")
+                shortcut: "Ctrl+E"
+                onTriggered: {
+                    var event = Qt.createComponent("Event.qml").createObject(historyWindow, {});
+                    eventArray.push(event);
+                }
+            }
+            }
+
+
+        Menu {
+            title: qsTr("Create")
+            MenuItem {
+                text: qsTr("Link")
+                shortcut: "Ctrl+L"
+                onTriggered: {
+                    var event = Qt.createComponent("Event.qml").createObject(historyWindow, {});
+                    eventArray.push(event);
+                    }
+            }
+        }
+            Menu {
+                title: qsTr("Lines")
+                MenuItem {
+                    text: qsTr("D")
+                    shortcut: "Ctrl+L"
+                     onTriggered: Qt.createComponent("lines.qml").createObject(historyWindow, {});
+                }
+            }
+
+
+    }
+
+TimelineDialog{
+        id:timelineDialog
+        visible:false
+    }
+}
+//old code for Menu Bar by Aruna
+/*Item{
     //    Window{
 
     id:historyWindow
@@ -76,3 +141,4 @@ Item{
 
 }
 //}
+*/
