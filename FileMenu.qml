@@ -71,55 +71,46 @@ TimelineDialog{
 /*Item{
     //    Window{
 
+Item{
     id:historyWindow
     width:1024
     height:800
 
-    property variant eventArray:[]
-    property variant timelineArray:[]
+    property int eventCount:0
+    property int timelineCount: 0
+    property variant timelineSelected
 
-    Component.onCompleted: {
-
-        console.log()
+    Component.onDestruction: {
+        //Update to DATABASE
     }
 
-//    MenuBar{
-    Menu{
-        id:rightClickMenu
-        title: "Add"
+    //    MenuBar{
+    Menu {
+        title: "Timeline"
+        MenuItem {
+            text: qsTr("New")
+            shortcut: "Ctrl+T"
+            onTriggered: {timelineDialog.visible = true;}
+        }
+    }
+    Menu {
+        title: "Event"
+        MenuItem {
+            text: qsTr("New")
+            shortcut: "Ctrl+E"
+            onTriggered: {
+                //                if(timelineCount > 0)
+                //                {
+                //                    Event.create();
+                //                }
+                //                else
+                //                {
+                //                    error.visible = true;
+                //                    error.errorMessageProperty = "Please create a timeline first!"
 
-        visible:false
-        Menu {
-            title: "Timeline"
-            MenuItem {
-                text: qsTr("New")
-                shortcut: "Ctrl+T"
-                onTriggered: {timelineDialog.visible = true;}
+                //                }
             }
         }
-        Menu {
-            title: "Event"
-            MenuItem {
-                text: qsTr("New")
-                shortcut: "Ctrl+E"
-                onTriggered: {
-                    var event = Qt.createComponent("Event.qml").createObject(historyWindow, {});
-                    eventArray.push(event);
-                }
-            }
-        }
-        Menu {
-            title: "People"
-            MenuItem {
-                text: qsTr("New")
-                shortcut: "Ctrl+P"
-                onTriggered: {
-                    var event = Qt.createComponent("People.qml").createObject(historyWindow, {});
-                    eventArray.push(event);
-                }
-            }
-        }
-
     }
 
     TimelineDialog{
@@ -127,16 +118,32 @@ TimelineDialog{
         visible:false
     }
 
+    ErrorWindow{
+        id:error
+        visible:false
+    }
+
     MouseArea{
-        anchors.fill:historyWindow
+        anchors.fill:parent
+        acceptedButtons: Qt.RightButton
 
-//        acceptedButtons: Qt.RightButton
+        onClicked: {
 
-        onClicked:{
-            rightClickMenu.visible = true;
+
+            if(timelineCount > 0)
+            {
+                var parentTimeline = Timeline.whichTimeline(mouseX, mouseY);
+                Event.create(parentTimeline)
+            }
+            else
+            {
+                error.visible = true;
+                error.errorMessageProperty = "Please create a timeline first!"
+
+            }
+
 
         }
-
     }
 
 }

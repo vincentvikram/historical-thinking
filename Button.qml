@@ -5,6 +5,7 @@ Rectangle  {
     width: 100; height: 40
     radius:5
 
+
     Text {
         id: label
         anchors.centerIn: parent
@@ -15,6 +16,7 @@ Rectangle  {
     property color onHoverColor: "gold"
     property color borderColor: "white"
     property string buttonLabel: "OK"
+
 
     signal buttonClick()
     onButtonClick:  {
