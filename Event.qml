@@ -10,7 +10,7 @@ Rectangle{
     width:200
     height:250
     y:parent.placementY - width - 100
-    x:parent.placementX
+    x:placementX
     border.color: "red"
     border.width:5
 
@@ -19,6 +19,8 @@ Rectangle{
     property string eventDescription
     property string eventName
     property string eventImagePath
+    property int placementX
+
     property variant eventPeople
     property variant associatedTimelineObjectName
 
@@ -36,6 +38,14 @@ Rectangle{
                 placeholderText: qsTr("dd-MMM-yyyy")
 
                 onTextChanged:Event.runUpdate(event, "SD", startDate.text);
+
+                MouseArea{
+                    anchors.fill:parent
+
+                    onClicked:{
+                        startDate.focus = true
+                    }
+                }
             }
             TextField{
                 id:endDate
@@ -117,6 +127,18 @@ Rectangle{
         {
             id:properties
             visible:false
+        }
+    }
+
+    MultiPointTouchArea {
+        anchors.fill: parent
+        touchPoints: [ TouchPoint { id: point1 }]
+        onReleased: {
+
+        }
+        onTouchUpdated: {
+            var point = event.mapToItem(event.parent, point1.x, point1.y)
+            Event.drawLine(point.x, point.y, event.x + event.width/2, event.y + event.height/2)
         }
     }
 }
