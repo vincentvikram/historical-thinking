@@ -3,149 +3,156 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 
-//new code for Menu Bar by Abhi
-ApplicationWindow{
-    id:historyWindow
-    title:qsTr("Historical Thinking Skills");
-    width:1024
-    height:800
+import "."
+import "Event.js" as Event
+import "TimeLine.js" as Timeline
+import "Person.js" as Person
 
-    property variant eventArray:[]
-    menuBar:   MenuBar{
+ScrollView{
+    id:scrollableWindow
+    width:Screen.desktopAvailableWidth
+    height:Screen.desktopAvailableHeight
+
+    Item{
+        id:historyWindow
+        width:Screen.desktopAvailableWidth
+        height:Screen.desktopAvailableHeight
+
+        property int eventCount:0
+        property int timelineCount: 0
+        property int linkCount: 0
+        property variant timelineSelected
+        property bool lineEnabled:false
+        property bool timelineEnabled:false
+        property bool personEnabled:false
+        property int clickCount:0
+        property variant linkElement1
+        property variant linkElement2
+
+
+
+        Component.onDestruction: {
+            //Update to DATABASE
+        }
 
         Menu {
-            title: qsTr("New")
+            title: "Timeline"
             MenuItem {
-                text: qsTr("Timeline")
+                text: qsTr("New")
                 shortcut: "Ctrl+T"
                 onTriggered: {timelineDialog.visible = true;}
-            }            
+            }
+        }
+        Menu {
+            title: "Event"
             MenuItem {
-                text: qsTr("People")
-                shortcut: "Ctrl+P"
-                onTriggered: {
-                    var event = Qt.createComponent("People.qml").createObject(historyWindow, {});
-                    eventArray.push(event);
-                    }
-                }
-            MenuItem {
-                text: qsTr("Event")
+                text: qsTr("New")
                 shortcut: "Ctrl+E"
                 onTriggered: {
-                    var event = Qt.createComponent("Event.qml").createObject(historyWindow, {});
-                    eventArray.push(event);
+                    historyWindow.timelineEnabled = true;
                 }
             }
-            }
-
-
+        }
         Menu {
-            title: qsTr("Create")
+            id:linkMenu
+            title: "Link"
             MenuItem {
-                text: qsTr("Link")
+                text: qsTr("New")
                 shortcut: "Ctrl+L"
                 onTriggered: {
-                    var event = Qt.createComponent("Event.qml").createObject(historyWindow, {});
-                    eventArray.push(event);
-                    }
-            }
-        }
-            Menu {
-                title: qsTr("Lines")
-                MenuItem {
-                    text: qsTr("D")
-                    shortcut: "Ctrl+L"
-                     onTriggered: Qt.createComponent("lines.qml").createObject(historyWindow, {});
+                    historyWindow.lineEnabled = true;
+                    console.log("settingLineEnable to true");
                 }
             }
+        }
+        Menu {
+            title: "Person"
+            MenuItem {
+                text: qsTr("New")
+                shortcut: "Ctrl+P"
+                onTriggered: {
+                    historyWindow.personEnabled = true;
+                    console.log("setting personEnabled to true");
+                }
+            }
+        }
 
+        TimelineDialog{
+            id:timelineDialog
+            visible:false
+        }
 
-    }
+        ErrorWindow{
+            id:error
+            visible:false
+        }
 
-TimelineDialog{
-        id:timelineDialog
-        visible:false
+        MouseArea{
+            anchors.fill:parent
+            acceptedButtons: Qt.RightButton
+
+            onClicked: {
+
+                var timelineConcerned, eventConcerned;
+
+                if(historyWindow.timelineEnabled){
+                    if(historyWindow.timelineCount > 0)
+                    {
+                        timelineConcerned = Timeline.whichTimeline(mouseX, mouseY);
+                        Event.create(timelineConcerned)
+                    }
+                    else
+                    {
+                        error.visible = true;
+                        error.errorMessageProperty = "Please create a timeline first!"
+
+                    }
+                    historyWindow.timelineEnabled = false;
+                }
+
+                if(historyWindow.lineEnabled){
+                    console.log("line enabled")
+                    if(historyWindow.eventCount > 1){
+                        historyWindow.clickCount ++;
+                        switch(historyWindow.clickCount){
+                        case 1:
+                            console.log("click 1");
+                            timelineConcerned = Timeline.whichTimeline(mouseX,mouseY);
+                            historyWindow.linkElement1 = Event.whichEvent(timelineConcerned,mouseX,mouseY);
+                            break;
+                        case 2:
+                            console.log("click 2");
+                            timelineConcerned = Timeline.whichTimeline(mouseX,mouseY);
+                            historyWindow.linkElement2 = Event.whichEvent(timelineConcerned,mouseX,mouseY);
+                            console.log(historyWindow.linkElement1 + "  " + historyWindow.linkElement2);
+                            Event.drawLine(historyWindow.linkElement1,historyWindow,historyWindow.linkElement1.centerX, historyWindow.linkElement1.centerY,historyWindow.linkElement2.centerX,historyWindow.linkElement2.centerY);
+                        }
+                    }
+                }
+
+                if(historyWindow.personEnabled){
+                    console.log("historyWindow personEnabled");
+                    if(historyWindow.eventCount > 0)
+                    {
+                        console.log("eventCount > 0");
+                        timelineConcerned = Timeline.whichTimeline(mouseX,mouseY);
+                        eventConcerned = Event.whichEvent(timelineConcerned, mouseX, mouseY);
+
+                        if(eventConcerned.personCount < 5){
+                            Person.create(eventConcerned);
+                        }
+                    }
+                    else
+                    {
+                        console.log("eventCount < 0");
+                        error.visible = true;
+                        error.errorMessageProperty = "Events can only be added to people!"
+
+                    }
+                    historyWindow.personEnabled = false;
+                }
+
+            }
+        }
     }
 }
-//old code for Menu Bar by Aruna
-/*Item{
-    //    Window{
-
-Item{
-    id:historyWindow
-    width:1024
-    height:800
-
-    property int eventCount:0
-    property int timelineCount: 0
-    property variant timelineSelected
-
-    Component.onDestruction: {
-        //Update to DATABASE
-    }
-
-    //    MenuBar{
-    Menu {
-        title: "Timeline"
-        MenuItem {
-            text: qsTr("New")
-            shortcut: "Ctrl+T"
-            onTriggered: {timelineDialog.visible = true;}
-        }
-    }
-    Menu {
-        title: "Event"
-        MenuItem {
-            text: qsTr("New")
-            shortcut: "Ctrl+E"
-            onTriggered: {
-                //                if(timelineCount > 0)
-                //                {
-                //                    Event.create();
-                //                }
-                //                else
-                //                {
-                //                    error.visible = true;
-                //                    error.errorMessageProperty = "Please create a timeline first!"
-
-                //                }
-            }
-        }
-    }
-
-    TimelineDialog{
-        id:timelineDialog
-        visible:false
-    }
-
-    ErrorWindow{
-        id:error
-        visible:false
-    }
-
-    MouseArea{
-        anchors.fill:parent
-        acceptedButtons: Qt.RightButton
-
-        onClicked: {
-
-
-            if(timelineCount > 0)
-            {
-                var parentTimeline = Timeline.whichTimeline(mouseX, mouseY);
-                Event.create(parentTimeline)
-            }
-            else
-            {
-                error.visible = true;
-                error.errorMessageProperty = "Please create a timeline first!"
-
-            }
-
-
-        }
-    }
-
-}
-//}
-*/

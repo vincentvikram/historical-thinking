@@ -5,142 +5,85 @@ import QtQuick.Dialogs 1.1
 import "."
 import "Event.js" as Event
 
-Rectangle{
+Item{
     id:event
-    width:200
-    height:250
+    width:100
+    height:100
     y:parent.placementY - width - 100
     x:placementX
-    border.color: "red"
-    border.width:5
 
     property string eventStartDate
     property string eventEndDate
     property string eventDescription
     property string eventName
     property string eventImagePath
-    property int placementX
+    property int personCount:0
+    property int centerX: event.x + event.width/2
+    property int centerY: event.y + event.height/2
+    property int placementX:100
+    property alias placementY:event.y
+    property alias eventButtonProperty:eventButton
+    property int initPosX
+    property int initPosY
 
     property variant eventPeople
     property variant associatedTimelineObjectName
 
     Component.onCompleted: {
-        console.log(parent.placementX + "  " + parent.placementY);
+        initPosX = placementX;
+        initPosY = placementY;
     }
 
-    Column{
+    //    Column{
 
-        Row{
-            TextField{
-                id:startDate
-                width:100
-                height:50
-                placeholderText: qsTr("dd-MMM-yyyy")
+    //        Row{
 
-                onTextChanged:Event.runUpdate(event, "SD", startDate.text);
 
-                MouseArea{
-                    anchors.fill:parent
+    Button{
+        id:eventButton
+        width: 100
+        height: 100
+        buttonLabel: "Click to\nadd name"
+        MouseArea{
+            anchors.fill:parent
+            onClicked: properties.visible = true;
+            drag.target:eventButton
 
-                    onClicked:{
-                        startDate.focus = true
-                    }
-                }
-            }
-            TextField{
-                id:endDate
-                width:100
-                height:50
-                placeholderText: qsTr("dd-MMM-yyyy")
-                onTextChanged:Event.runUpdate(event, "ED", endDate.text);
-            }
-        }
-
-        Row{
-            Rectangle{
-                width:98
-                height:100
-
-                Image{
-                    id:image
-                    width:100
-                    height:100
-
-                    Text{
-                        id:imageText
-                        text: "Click to add\n image"
-                    }
-
-                    onSourceChanged: Event.runUpdate(event, "IMG", image.source);
-                }
-                MouseArea{
-
-                    anchors.fill:parent
-                    onClicked:{
-                        fileDialog.open();
-                    }
-                }
+            onMouseXChanged: {
+                Event.eventDragged(event, initPosX - event.x,initPosY - event.y);
             }
 
-            TextField{
-                id:description
-                width:100
-                height:100
-                placeholderText: qsTr("Describe the\n event")
-                onTextChanged:Event.runUpdate(event, "DESC", description.text);
-            }
-        }
-
-        TextField{
-            id:name
-            width:200
-            height:50
-            placeholderText: qsTr("Event name")
-            onTextChanged:Event.runUpdate(event, "EN", name.text);
-        }
-
-        Button{
-            width: 195
-            height: 45
-            buttonLabel: "Properties"
-            MouseArea{
-                anchors.fill:parent
-                onClicked: properties.visible = true;
-            }
-        }
-
-
-        FileDialog {
-            id: fileDialog
-            title: "Please choose a file"
-            selectMultiple: false
-            onAccepted: {
-                image.source = fileDialog.fileUrl;
-                imageText.visible = false;
-            }
-            onRejected: {
-                fileDialog.close();
-            }
-        }
-
-        EventProperties
-        {
-            id:properties
-            visible:false
+//            drag.active: true
+//            drag.axis: Drag.XAndYAxis*/
         }
     }
 
-    MultiPointTouchArea {
-        anchors.fill: parent
-        touchPoints: [ TouchPoint { id: point1 }]
-        onReleased: {
 
-        }
-        onTouchUpdated: {
-            var point = event.mapToItem(event.parent, point1.x, point1.y)
-            Event.drawLine(point.x, point.y, event.x + event.width/2, event.y + event.height/2)
-        }
+
+    EventProperties
+    {
+        id:properties
+        visible:false
     }
+
+    //    Rectangle {
+    //        id: line
+    //        color: "red"
+    ////        transformOrigin: Item.TopLeft
+    //    }
+
+    //    MultiPointTouchArea {
+    //        anchors.fill: parent
+    //        touchPoints: [ TouchPoint { id: point1 }]
+    //        onReleased: {
+
+    //        }
+    //        onTouchUpdated: {
+    //            var point = event.mapToItem(null, point1.x, point1.y)
+    //            Event.drawLine(point1.x, point1.y, event.width/2, event.height/2)
+    //        }
+    //    }
+
 }
 
 

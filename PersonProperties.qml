@@ -6,7 +6,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "Event.js" as Event
+import "Person.js" as Person
 
 // Use an item as container to group both the overlay and the dialog
 // I do this because the overlay itself has an opacity set, and otherwise
@@ -15,7 +15,7 @@ import "Event.js" as Event
 // display stuff itself, this is better performance wise.
 
 Item {
-    id: eventPropertiesDialog
+    id: personPropertiesDialog
     property int filterCount
     property int imageCount
     x:512
@@ -28,7 +28,7 @@ Item {
             anchors.centerIn: parent
 
             Component.onCompleted: {
-                addTab("Event Properties" , tab1)
+                addTab("Person Properties" , tab1)
 
             }
 
@@ -41,9 +41,9 @@ Item {
                         TextField{
                             id:eName
                             width:400
-                            placeholderText: qsTr("Event name")
-                            onTextChanged:{Event.runUpdate(eventPropertiesDialog.parent, "EN", eName.text);
-                                eventPropertiesDialog.parent.eventButtonProperty.buttonLabel = eName.text;
+                            placeholderText: qsTr("Person name")
+                            onTextChanged:{Person.runUpdate(personPropertiesDialog.parent, "EN", eName.text);
+                                personPropertiesDialog.parent.personButtonProperty.buttonLabel = eName.text;
                             }
                         }
                         Row{
@@ -52,14 +52,14 @@ Item {
                                 width: 400
                                 height:50
                                 placeholderText: qsTr("dd-MMM-yyyy")
-                                onTextChanged:Event.runUpdate(eventPropertiesDialog.parent, "SD", startDate.text);
+                                onTextChanged:person.runUpdate(personPropertiesDialog.parent, "SD", startDate.text);
                             }
                             TextField{
                                 id:endDate
                                 width: 400
                                 height:50
                                 placeholderText: qsTr("dd-MMM-yyyy")
-                                onTextChanged:Event.runUpdate(eventPropertiesDialog.parent, "ED", endDate.text);
+                                onTextChanged:person.runUpdate(personPropertiesDialog.parent, "ED", endDate.text);
                             }
                         }
                     }
@@ -68,9 +68,9 @@ Item {
                         y:90
                         width:790
                         height:200
-                        id: eventDesc
+                        id: personDesc
                         wrapMode: TextEdit.Wrap
-                        onTextChanged:Event.runUpdate(eventPropertiesDialog.parent, "DESC", eventDesc.text);
+                        onTextChanged:person.runUpdate(personPropertiesDialog.parent, "DESC", personDesc.text);
                     }
 
                     Row{
@@ -143,7 +143,7 @@ Item {
                                 anchors.fill:parent
 
                                 onClicked:{
-                                    eventPropertiesDialog.visible = false;
+                                    personPropertiesDialog.visible = false;
 
                                 }
                             }

@@ -1,6 +1,3 @@
-// This QML file (called Dialog.qml) is used to create a simple popup
-// It will show an overlay on top of the parent and a small white area
-// that is the dialog itself. For demo purposes no fancy stuff in the popup
 import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
@@ -8,32 +5,21 @@ import QtQuick.Dialogs 1.1
 import "."
 import "TimeLine.js" as Timeline
 
-// Use an item as container to group both the overlay and the dialog
-// I do this because the overlay itself has an opacity set, and otherwise
-// also the dialog would have been semi-transparent.
-// I use an Item instead of an Rectangle. Always use an 'Item' if it does not
-// display stuff itself, this is better performance wise.
 Item {
     id: dialogComponent
     anchors.fill: parent
 
     property variant timelineArray:[]
 
-    // Add a simple animation to fade in the popup
-    // let the opacity go from 0 to 1 in 400ms
     PropertyAnimation { target: dialogComponent; property: "opacity";
         duration: 400; from: 0; to: 1;
         easing.type: Easing.InOutQuad ; running: true }
 
-    // This rectange is the a overlay to partially show the parent through it
-    // and clicking outside of the 'dialog' popup will do 'nothing'
     Rectangle {
         anchors.fill: parent
         id: overlay
         color: "#000000"
         opacity: 0.6
-        // add a mouse area so that clicks outside
-        // the dialog window will not do anything
         MouseArea {
             anchors.fill: parent
             onClicked: {dialogComponent.visible = false;
@@ -127,18 +113,47 @@ Item {
                 TextField{
 
                     id:period
+                    validator: IntValidator {bottom:1; top:2147483647}
                     placeholderText: qsTr("Time Period")
                 }
+                ComboBox{
+                    id:periodUnit
+                    model:["s","min","h","d","m","y","D","C","M"]
+                }
+            }
+
+            Row{
+                spacing: 5
+                Text{
+                    text:"SCALE:"
+                }
+                ComboBox{
+                    id:scaleUnit
+                    model:["d","m","y","D","C","M"]
+                }
+
+                TextField{
+                    id:scale
+                    validator: IntValidator {bottom:1; top:2147483647}
+                    text:"1"
+                }
+                Text{
+                    text:"cm"
+                }
+
             }
 
             Button{
                 id:ok
 
+
                 onButtonClick:
-                {    Timeline.populate(timelineArray,startDateDate.text,startDateMonth.text,
+                {
+                    console.log(scaleUnit.currentText);
+                    Timeline.populate(timelineArray,startDateDate.text,startDateMonth.text,
                                        startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text,
                                        period.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
-                                       bcEndDate.checked);
+                                       bcEndDate.checked, periodUnit, scale.text, scaleUnit.currentText);
                     dialogComponent.visible = false;
                 }
 

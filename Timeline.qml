@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Window 2.2
 
 Item{
     id:timelineParent
@@ -8,16 +9,19 @@ Item{
     property variant startDateProperty
     property variant endDateProperty
     property string timePeriodProperty
-    property int placementY: 100
-    property int  placementX: 50
+    property alias placementY: timeline.y
+    property alias  placementX: timeline.x
     property int timelineNumber
+    property alias widthProperty:timeline.width
+    property int timelinePixelDensity:Screen.pixelDensity
 
-    Rectangle {
+
+    Line {
         id:timeline
-        width: 800
         height: 2
         y:placementY
         x:placementX
+        rotation:0
 
         color:'black'
 
@@ -28,7 +32,7 @@ Item{
 
         Text {
             id: endDate
-            x:timeline.width - 50
+            x:timeline.width
             text: endDateText
         }
 
