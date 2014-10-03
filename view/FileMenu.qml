@@ -31,10 +31,5 @@ ApplicationWindow{
                     }
             }
         }
-<<<<<<< HEAD
     }
-
-=======
-
->>>>>>> c511a4334fccf681fe0954ea8b924e3cb840e1de
 }
