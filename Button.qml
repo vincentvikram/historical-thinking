@@ -1,8 +1,10 @@
 import QtQuick 2.0
+import QtQuick.Window 2.1
 
 Rectangle  {
     id: button
-    width: 100; height: 40
+    width: 100/1366 * Screen.desktopAvailableWidth
+    height: 40/768 * Screen.desktopAvailableHeight
     radius:5
 
 

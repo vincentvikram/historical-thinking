@@ -20,18 +20,18 @@ Item {
         id: overlay
         color: "#000000"
         opacity: 0.6
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {dialogComponent.visible = false;
-                startDateDate.text ="";
-                startDateMonth.text = "";
-                startDateYear.text = "";
-                endDateDate.text="";
-                endDateMonth.text= "";
-                endDateYear.text= "";
-                period.text = "";
-                }
-        }
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: {dialogComponent.visible = false;
+//                startDateDate.text ="";
+//                startDateMonth.text = "";
+//                startDateYear.text = "";
+//                endDateDate.text="";
+//                endDateMonth.text= "";
+//                endDateYear.text= "";
+//                period.text = "";
+//                }
+//        }
     }
     Rectangle{
 
@@ -154,6 +154,19 @@ Item {
                                        startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text,
                                        period.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
                                        bcEndDate.checked, periodUnit, scale.text, scaleUnit.currentText);
+                    dialogComponent.visible = false;
+                }
+
+            }
+            Button{
+                id:close
+                buttonLabel: "Close"
+                x: ok.x + 100
+                y:ok.y
+
+
+                onButtonClick:
+                {
                     dialogComponent.visible = false;
                 }
 

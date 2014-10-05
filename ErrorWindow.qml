@@ -1,9 +1,10 @@
 import QtQuick 2.0
+import QtQuick.Window 2.1
 import "."
 Rectangle {
     id:errorWindow
-    width: 300
-    height: 100
+    width: 300/1366 * Screen.desktopAvailableWidth
+    height: 100/768 * Screen.desktopAvailableHeight
     color:"lightgray"
 
     property string errorMessageProperty
@@ -12,7 +13,7 @@ Rectangle {
 
     Column{
            anchors.centerIn: parent
-           spacing: 10
+           spacing: 10/768 * Screen.desktopAvailableHeight
     Text{
         id:errorMessage
 
@@ -22,7 +23,7 @@ Rectangle {
     Button{
         buttonLabel: "Close"
         buttonColor: "darkgray"
-        x:50
+        x:50/1366 * Screen.desktopAvailableWidth
         onButtonClick:  {errorWindow.visible = false;}
     }
     }
