@@ -12,36 +12,39 @@ import "Person.js" as Person
 ApplicationWindow{
    menuBar:MenuBar{
        Menu {
-        title: "Timeline"
+        title: "New"
         MenuItem {
-            text: qsTr("New")
+            text: qsTr("Timeline")
             shortcut: "Ctrl+T"
             onTriggered: {timelineDialog.visible = true;}
         }
-    }
-    Menu {
-        title: "Event"
+
         MenuItem {
-            text: qsTr("New")
+            text: qsTr("Event")
             shortcut: "Ctrl+E"
-            onTriggered: {
-                historyWindow.timelineEnabled = true;
-            }
+            onTriggered: {historyWindow.timelineEnabled = true;}
         }
-    }
-    Menu {
-        id:linkMenu
-        title: "Link"
+
         MenuItem {
-            text: qsTr("New")
+            text: qsTr("Person/People")
+            shortcut: "Ctrl+P"
+            onTriggered: {onTriggered: {
+                    historyWindow.personEnabled = true;
+                    console.log("setting personEnabled to true");
+                }}
+        }
+       }
+       Menu {
+        title: "Create"
+        MenuItem {
+            id: linkMenu
+            text: qsTr("Link")
             shortcut: "Ctrl+L"
             onTriggered: {
                 historyWindow.linkEnabled = true;
                 console.log("settingLineEnable to true");
             }
-
         }
-
         MenuItem {
             text: qsTr("Cause & effect")
             onTriggered: {
@@ -87,20 +90,20 @@ ApplicationWindow{
                 console.log("settingLineEnable to true");
             }
         }
-    }
-
-    Menu {
-        title: "Person"
+       }
+       Menu {
+        title: "Help"
         MenuItem {
-            text: qsTr("New")
-            shortcut: "Ctrl+P"
+            text: qsTr("Find Help")
+            shortcut: "F1"
             onTriggered: {
-                historyWindow.personEnabled = true;
-                console.log("setting personEnabled to true");
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
             }
         }
-    }
+       }
    }
+
     ScrollView{
         id:scrollableWindow
         width:Screen.desktopAvailableWidth
