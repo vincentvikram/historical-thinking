@@ -29,6 +29,7 @@ Item{
         width: 100/1366 * Screen.desktopAvailableWidth
         height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
+        buttonColor: "lightgreen"
         MouseArea{
             anchors.fill:parent
             onClicked: properties.visible = true;
