@@ -7,9 +7,9 @@ import "Event.js" as Event
 
 Item{
     id:event
-    width:100
-    height:100
-    y:parent.placementY - width - 100
+    width:100/1366 * Screen.desktopAvailableWidth
+    height:100/768 * Screen.desktopAvailableHeight
+    y:parent.placementY - height - (100/768 * Screen.desktopAvailableHeight)
     x:placementX
 
     property string eventStartDate
@@ -20,7 +20,7 @@ Item{
     property int personCount:0
     property int centerX: event.x + event.width/2
     property int centerY: event.y + event.height/2
-    property int placementX:100
+    property int placementX:100/1366 * Screen.desktopAvailableWidth
     property alias placementY:event.y
     property alias eventButtonProperty:eventButton
     property int initPosX
@@ -41,8 +41,8 @@ Item{
 
     Button{
         id:eventButton
-        width: 100
-        height: 100
+        width: 100/1366 * Screen.desktopAvailableWidth
+        height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
         MouseArea{
             anchors.fill:parent

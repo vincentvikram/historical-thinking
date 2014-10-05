@@ -18,13 +18,13 @@ Item {
     id: personPropertiesDialog
     property int filterCount
     property int imageCount
-    x:512
+    x:512/1366 * Screen.desktopAvailableWidth
     z:parent.z + 20
 
     Rectangle{
         TabView {
-            width: 800
-            height: 600
+            width: 800/1366 * Screen.desktopAvailableWidth
+            height: 600/768 * Screen.desktopAvailableHeight
             anchors.centerIn: parent
 
             Component.onCompleted: {
@@ -40,7 +40,7 @@ Item {
                     Column{
                         TextField{
                             id:eName
-                            width:400
+                            width:400/1366 * Screen.desktopAvailableWidth
                             placeholderText: qsTr("Person name")
                             onTextChanged:{Person.runUpdate(personPropertiesDialog.parent, "EN", eName.text);
                                 personPropertiesDialog.parent.personButtonProperty.buttonLabel = eName.text;
@@ -49,15 +49,15 @@ Item {
                         Row{
                             TextField{
                                 id:startDate
-                                width: 400
-                                height:50
+                                width: 400/1366 * Screen.desktopAvailableWidth
+                                height:50/768 * Screen.desktopAvailableHeight
                                 placeholderText: qsTr("dd-MMM-yyyy")
                                 onTextChanged:person.runUpdate(personPropertiesDialog.parent, "SD", startDate.text);
                             }
                             TextField{
                                 id:endDate
-                                width: 400
-                                height:50
+                                width: 400/1366 * Screen.desktopAvailableWidth
+                                height:50/768 * Screen.desktopAvailableHeight
                                 placeholderText: qsTr("dd-MMM-yyyy")
                                 onTextChanged:person.runUpdate(personPropertiesDialog.parent, "ED", endDate.text);
                             }
@@ -65,9 +65,9 @@ Item {
                     }
 
                     TextArea {
-                        y:90
-                        width:790
-                        height:200
+                        y:90/768 * Screen.desktopAvailableHeight
+                        width:790/1366 * Screen.desktopAvailableWidth
+                        height:200/768 * Screen.desktopAvailableHeight
                         id: personDesc
                         wrapMode: TextEdit.Wrap
                         onTextChanged:person.runUpdate(personPropertiesDialog.parent, "DESC", personDesc.text);
@@ -75,26 +75,26 @@ Item {
 
                     Row{
                         id:imageContainer
-                        width:790
-                        height:100
-                        x:3
-                        y:280
+                        width:790/1366 * Screen.desktopAvailableWidth
+                        height:100/768 * Screen.desktopAvailableHeight
+                        x:3/1366 * Screen.desktopAvailableWidth
+                        y:280/768 * Screen.desktopAvailableHeight
                         spacing:10
                     }
                     Row{
                         id:filterContainer
-                        width:790
-                        height:110
+                        width:790/1366 * Screen.desktopAvailableWidth
+                        height:110/768 * Screen.desktopAvailableHeight
                         x:0
-                        y:390
+                        y:390/768 * Screen.desktopAvailableHeight
                         spacing:10
 
                     }
 
                     Row{
-                        x:100
-                        y:530
-                        spacing: 100
+                        x:100/1366 * Screen.desktopAvailableWidth
+                        y:530/768 * Screen.desktopAvailableHeight
+                        spacing: 100/1366 * Screen.desktopAvailableWidth
                         Button{
                             id:filters
 

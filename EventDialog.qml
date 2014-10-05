@@ -40,8 +40,8 @@ Item {
     Rectangle{
         anchors.centerIn: parent
         TabView {
-            width: 360
-            height: 360
+            width: 360/1366 * Screen.desktopAvailableWidth
+            height: 360/768 * Screen.desktopAvailableHeight
             anchors.centerIn: parent
 
             Component.onCompleted: {
@@ -57,7 +57,7 @@ Item {
 
                     TextField {
                         id: startDate1
-                        y: 10
+                        y: 10/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("dd/mm/yyyy")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
@@ -65,7 +65,7 @@ Item {
 
                     TextField {
                         id: endDate1
-                        y: 40
+                        y: 40/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("dd/mm/yyyy")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
@@ -90,7 +90,7 @@ Item {
 
                     TextField {
                         id: startDate2
-                        y: 10
+                        y: 10/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("dd/mm/yyyy")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}
@@ -99,7 +99,7 @@ Item {
 
                     TextField {
                         id: period2
-                        y: 40
+                        y: 40/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("No. of years")
                     }
                     Button {
@@ -119,13 +119,13 @@ Item {
 
                     TextField {
                         id: period3
-                        y: 10
+                        y: 10/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("No of years")
                     }
 
                     TextField {
                         id: endDate3
-                        y: 40
+                        y: 40/768 * Screen.desktopAvailableHeight
                         placeholderText: qsTr("dd/mm/yyyy")
                         //                        validator: RegExpValidator { regExp:
                         //                                '/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|'}

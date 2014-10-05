@@ -7,8 +7,8 @@ import "Person.js" as Person
 
 Item{
     id:person
-    width:100
-    height:100
+    width:100/1366 * Screen.desktopAvailableWidth
+    height:100/768 * Screen.desktopAvailableHeight
     x:personCenterX
     y:personCenterY
 
@@ -26,8 +26,8 @@ Item{
     Button{
         id:personButton
         radius: width*0.5
-        width: 100
-        height: 100
+        width: 100/1366 * Screen.desktopAvailableWidth
+        height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
         MouseArea{
             anchors.fill:parent
