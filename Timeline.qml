@@ -28,6 +28,7 @@ Item{
         Text {
             id: startDate
             text: startDateText
+            x:timeline.x - 200/1366 * Screen.desktopAvailableWidth
         }
 
         Text {
