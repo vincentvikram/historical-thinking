@@ -39,8 +39,56 @@ ApplicationWindow{
                 historyWindow.linkEnabled = true;
                 console.log("settingLineEnable to true");
             }
+
+        }
+
+        MenuItem {
+            text: qsTr("Cause & effect")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
+
+        }
+
+        MenuItem {
+            text: qsTr("Parent & child")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
+        }
+        MenuItem {
+            text: qsTr("Cause & effect")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
+
+        }
+        MenuItem {
+            text: qsTr("Change in continuity")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
+        }
+        MenuItem {
+            text: qsTr("Separator")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
+        }
+        MenuItem {
+            text: qsTr("Related to")
+            onTriggered: {
+                historyWindow.linkEnabled = true;
+                console.log("settingLineEnable to true");
+            }
         }
     }
+
     Menu {
         title: "Person"
         MenuItem {
