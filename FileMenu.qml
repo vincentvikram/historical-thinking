@@ -22,21 +22,22 @@ ApplicationWindow{
             MenuItem {
                 text: qsTr("Event")
                 shortcut: "Ctrl+E"
-                onTriggered: {historyWindow.timelineEnabled = true;}
-            }
-            Menu {
-                title: "Event"
-                MenuItem {
-                    text: qsTr("New")
-                    shortcut: "Ctrl+E"
-                    onTriggered: {
-                        //                historyWindow.timelineEnabled = true;
-                        Event.create();
-                    }
-                }
+                onTriggered: {Event.create();}
             }
             MenuItem {
-                text: qsTr("Cause & effect")
+                text: qsTr("Person")
+                shortcut: "Ctrl+P"
+                onTriggered: {
+                    Person.create();
+                }
+            }
+        }
+        Menu {
+            id:linkMenu
+            title: "Link"
+            MenuItem {
+                text: qsTr("New")
+                shortcut: "Ctrl+L"
                 onTriggered: {
                     historyWindow.linkEnabled = true;
                     console.log("settingLineEnable to true");
@@ -80,33 +81,8 @@ ApplicationWindow{
                     console.log("settingLineEnable to true");
                 }
             }
-
-        }
-        Menu {
-            title: "Help"
-            MenuItem {
-                text: qsTr("Find Help")
-                shortcut: "F1"
-                onTriggered: {
-                }
-            }
-        }
-
-        Menu {
-            title: "Person"
-            MenuItem {
-                text: qsTr("New")
-                shortcut: "Ctrl+P"
-                onTriggered: {
-                    Person.create();
-                }
-            }
         }
     }
-
-
-
-
     ScrollView{
         id:scrollableWindow
         width:Screen.desktopAvailableWidth
