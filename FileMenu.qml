@@ -24,25 +24,15 @@ ApplicationWindow{
             shortcut: "Ctrl+E"
             onTriggered: {historyWindow.timelineEnabled = true;}
         }
-
-        MenuItem {
-            text: qsTr("Person/People")
-            shortcut: "Ctrl+P"
-            onTriggered: {onTriggered: {
-                    historyWindow.personEnabled = true;
-                    console.log("setting personEnabled to true");
-                }}
-        }
-       }
-       Menu {
-        title: "Create"
-        MenuItem {
-            id: linkMenu
-            text: qsTr("Link")
-            shortcut: "Ctrl+L"
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
+        Menu {
+            title: "Event"
+            MenuItem {
+                text: qsTr("New")
+                shortcut: "Ctrl+E"
+                onTriggered: {
+                    //                historyWindow.timelineEnabled = true;
+                    Event.create();
+                }
             }
         }
         MenuItem {
@@ -151,20 +141,7 @@ ApplicationWindow{
 
                     var timelineConcerned, eventConcerned;
 
-                    if(historyWindow.timelineEnabled){
-                        if(historyWindow.timelineCount > 0)
-                        {
-                            timelineConcerned = Timeline.whichTimeline(mouseX, mouseY);
-                            Event.create(timelineConcerned)
-                        }
-                        else
-                        {
-                            error.visible = true;
-                            error.errorMessageProperty = "Please create a timeline first!"
 
-                        }
-                        historyWindow.timelineEnabled = false;
-                    }
 
                     if(historyWindow.linkEnabled){
                         console.log("line enabled")
