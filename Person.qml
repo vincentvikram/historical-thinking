@@ -13,14 +13,13 @@ Item{
     y:personCenterY
 
     property string personStartDate
+    property alias propertiesVisible:properties.visible
     property string personEndDate
     property string personDescription
     property string personName
     property string personImagePath
     property int personCenterX
     property int personCenterY
-//    property alias placementX:person.x
-//    property alias placementY:person.y
     property alias personButtonProperty:personButton
 
     Button{
@@ -30,10 +29,6 @@ Item{
         height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
         buttonColor: "lightgreen"
-        MouseArea{
-            anchors.fill:parent
-            onClicked: properties.visible = true;
-        }
     }
 
     PersonProperties
@@ -42,6 +37,14 @@ Item{
         visible:false
     }
 
+    MouseArea{
+        anchors.fill:parent
+        drag.target: person
+        onClicked: {
+            Person.makeAllOtherPropertyBoxesInvisible(person);
+        }
+
+    }
 }
 
 

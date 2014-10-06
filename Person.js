@@ -1,16 +1,38 @@
-function create(parentEvent) {
-    console.log("create person")
-    var person = Qt.createComponent("Person.qml").createObject(parentEvent,
-                            {"objectName":"person" + (parentEvent.personCount)});
-    var positionsArray = [{"x":(person.x + person.width),"y":person.y},
-                          {"x":(person.x+person.width),"y":(person.y  - person.height)},
-                          {"x":person.x,"y":(person.y  - person.height)},
-                          {"x":(person.x-person.width),"y":(person.y  - person.height)},
-                          {"x":person.x - person.width,"y":person.y}]
-    person.personCenterX = person.mapToItem(parentEvent, positionsArray[parentEvent.personCount].x,positionsArray[parentEvent.personCount].y).x;
-    person.personCenterY = person.mapToItem(parentEvent, positionsArray[parentEvent.personCount].x,positionsArray[parentEvent.personCount].y).y;
-    parentEvent.personCount++;
+function create() {
+    var person;
+
+    if(historyWindow.eventCount > 0)
+    {
+        person = Qt.createComponent("Person.qml").createObject(historyWindow,
+                                {"objectName":"person" + (historyWindow.personCount)});
+
+        person.personCenterX = 110 * historyWindow.personCount;
+        person.personCenterY = 150;
+        historyWindow.personCount++;
+    }
+    else
+    {
+        console.log("eventCount < 0");
+        error.visible = true;
+
+    }
 }
+
+function makeAllOtherPropertyBoxesInvisible(person){
+
+    var i=0;
+
+    for(;i<person.parent.children.length;i++){
+        if(person.parent.children[i].objectName.indexOf("person") != -1){
+            if(person.parent.children[i].propertiesVisible){
+                person.parent.children[i].propertiesVisible = false;
+            }
+        }
+    }
+
+    person.propertiesVisible = true;
+}
+
 
 function runUpdate(personObjectName, whichVariable, variable) {
     var i, parentTimeline = person.parent, child;

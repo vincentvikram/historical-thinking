@@ -10,89 +10,102 @@ import "TimeLine.js" as Timeline
 import "Person.js" as Person
 
 ApplicationWindow{
-   menuBar:MenuBar{
-       Menu {
-        title: "New"
-        MenuItem {
-            text: qsTr("Timeline")
-            shortcut: "Ctrl+T"
-            onTriggered: {timelineDialog.visible = true;}
-        }
+    menuBar:MenuBar{
+        Menu {
+            title: "New"
+            MenuItem {
+                text: qsTr("Timeline")
+                shortcut: "Ctrl+T"
+                onTriggered: {timelineDialog.visible = true;}
+            }
 
-        MenuItem {
-            text: qsTr("Event")
-            shortcut: "Ctrl+E"
-            onTriggered: {historyWindow.timelineEnabled = true;}
+            MenuItem {
+                text: qsTr("Event")
+                shortcut: "Ctrl+E"
+                onTriggered: {historyWindow.timelineEnabled = true;}
+            }
+            Menu {
+                title: "Event"
+                MenuItem {
+                    text: qsTr("New")
+                    shortcut: "Ctrl+E"
+                    onTriggered: {
+                        //                historyWindow.timelineEnabled = true;
+                        Event.create();
+                    }
+                }
+            }
+            MenuItem {
+                text: qsTr("Cause & effect")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+
+            }
+
+            MenuItem {
+                text: qsTr("Parent & child")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+            }
+            MenuItem {
+                text: qsTr("Cause & effect")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+
+            }
+            MenuItem {
+                text: qsTr("Change in continuity")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+            }
+            MenuItem {
+                text: qsTr("Separator")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+            }
+            MenuItem {
+                text: qsTr("Related to")
+                onTriggered: {
+                    historyWindow.linkEnabled = true;
+                    console.log("settingLineEnable to true");
+                }
+            }
+
         }
         Menu {
-            title: "Event"
+            title: "Help"
             MenuItem {
-                text: qsTr("New")
-                shortcut: "Ctrl+E"
+                text: qsTr("Find Help")
+                shortcut: "F1"
                 onTriggered: {
-                    //                historyWindow.timelineEnabled = true;
-                    Event.create();
                 }
             }
         }
-        MenuItem {
-            text: qsTr("Cause & effect")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
 
+        Menu {
+            title: "Person"
+            MenuItem {
+                text: qsTr("New")
+                shortcut: "Ctrl+P"
+                onTriggered: {
+                    Person.create();
+                }
+            }
         }
+    }
 
-        MenuItem {
-            text: qsTr("Parent & child")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
-        }
-        MenuItem {
-            text: qsTr("Cause & effect")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
 
-        }
-        MenuItem {
-            text: qsTr("Change in continuity")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
-        }
-        MenuItem {
-            text: qsTr("Separator")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
-        }
-        MenuItem {
-            text: qsTr("Related to")
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
-        }
-       }
-       Menu {
-        title: "Help"
-        MenuItem {
-            text: qsTr("Find Help")
-            shortcut: "F1"
-            onTriggered: {
-                historyWindow.linkEnabled = true;
-                console.log("settingLineEnable to true");
-            }
-        }
-       }
-   }
+
 
     ScrollView{
         id:scrollableWindow
@@ -106,11 +119,11 @@ ApplicationWindow{
 
             property int eventCount:0
             property int timelineCount: 0
+            property int personCount: 0
             property int linkCount: 0
             property variant timelineSelected
             property bool linkEnabled:false
             property bool timelineEnabled:false
-            property bool personEnabled:false
             property int clickCount:0
             property variant linkElement1
             property variant linkElement2
@@ -163,36 +176,16 @@ ApplicationWindow{
                         }
                     }
 
-                    if(historyWindow.personEnabled){
-                        console.log("historyWindow personEnabled");
-                        if(historyWindow.eventCount > 0)
-                        {
-                            console.log("eventCount > 0");
-                            timelineConcerned = Timeline.whichTimeline(mouseX,mouseY);
-                            eventConcerned = Event.whichEvent(timelineConcerned, mouseX, mouseY);
 
-                            if(eventConcerned.personCount < 5){
-                                Person.create(eventConcerned);
-                            }
-                        }
-                        else
-                        {
-                            console.log("eventCount < 0");
-                            error.visible = true;
-                            error.errorMessageProperty = "Events can only be added to people!"
-
-                        }
-                        historyWindow.personEnabled = false;
-                    }
 
                 }
             }
         }
     }
     statusBar: StatusBar {
-            RowLayout {
-                Label { text: "Made with love! :)" }
-            }
+        RowLayout {
+            Label { text: "Made with love! :)" }
         }
+    }
 
 }
