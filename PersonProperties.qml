@@ -18,8 +18,10 @@ Item {
     id: personPropertiesDialog
     property int filterCount
     property int imageCount
-    x:512/1366 * Screen.desktopAvailableWidth
-    z:parent.z + 20
+    transformOrigin: Item.Top
+    x:personPropertiesDialog.mapToItem(personPropertiesDialog.parent.parent,683/1366 * Screen.desktopAvailableWidth,150/768 * Screen.desktopAvailableHeight).x
+    y:personPropertiesDialog.mapToItem(personPropertiesDialog.parent.parent,683/1366 * Screen.desktopAvailableWidth,150/768 * Screen.desktopAvailableHeight).y
+    z:personPropertiesDialog.parent.z + 10000
 
     Rectangle{
         TabView {

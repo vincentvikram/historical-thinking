@@ -1,14 +1,26 @@
-function create(parentTimeline) {
-    var event = Qt.createComponent("Event.qml").createObject(parentTimeline,
+function create() {
+    var event;
+
+    if(historyWindow.timelineCount > 0)
+    {
+        event = Qt.createComponent("Event.qml").createObject(historyWindow,
                                                              {"objectName":"event" + (historyWindow.eventCount)});
-    console.log("Event parent" + parentTimeline);
+        event.y = 0;
+        event.x = 110*historyWindow.eventCount;
 
-    var i=0, localPlacementX, j=0;
+        if(event.placementX > scrollableWindow.width){
+            historyWindow.width += 2* event.placementX;
+        }
 
-    var dateArray = [];
+        historyWindow.eventCount++;
 
-    event.placementX = (historyWindow.eventCount > 0) ? 350*historyWindow.eventCount : 100;
-    historyWindow.eventCount++;
+    }
+    else
+    {
+        error.visible = true;
+        error.errorMessageProperty = "Please create a timeline first!"
+
+    }
 
 }
 
