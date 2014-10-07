@@ -10,6 +10,10 @@ import "TimeLine.js" as Timeline
 import "Person.js" as Person
 
 ApplicationWindow{
+    id:applicationWindow
+    width:Screen.desktopAvailableWidth
+    height:Screen.desktopAvailableHeight
+
     menuBar:MenuBar{
         Menu {
             title: "File"
@@ -112,13 +116,12 @@ ApplicationWindow{
     }
     ScrollView{
         id:scrollableWindow
-        width:Screen.desktopAvailableWidth
-        height:Screen.desktopAvailableHeight
-
+        width:parent.width
+        height:parent.height
         Item{
             id:historyWindow
-            width:Screen.desktopAvailableWidth
-            height:Screen.desktopAvailableHeight
+            width:parent.width
+            height:parent.height
 
             property int eventCount:0
             property int timelineCount: 0
@@ -131,17 +134,13 @@ ApplicationWindow{
             property variant linkElement1
             property variant linkElement2
 
-
-
             Component.onDestruction: {
                 //Update to DATABASE
             }
-
             DbConnection{
                 id:dbConnector
                 visible:false
             }
-
             TimelineDialog{
                 id:timelineDialog
                 visible:false
@@ -158,8 +157,6 @@ ApplicationWindow{
                 onClicked: {
 
                     var timelineConcerned, eventConcerned;
-
-
 
                     if(historyWindow.linkEnabled){
                         console.log("line enabled")
@@ -181,16 +178,8 @@ ApplicationWindow{
                         }
                     }
 
-
-
                 }
             }
         }
     }
-    statusBar: StatusBar {
-        RowLayout {
-            Label { text: "Made with love! :)" }
-        }
-    }
-
 }
