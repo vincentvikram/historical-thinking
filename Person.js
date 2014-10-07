@@ -1,21 +1,13 @@
 function create() {
     var person;
 
-    if(historyWindow.eventCount > 0)
-    {
         person = Qt.createComponent("Person.qml").createObject(historyWindow,
                                 {"objectName":"person" + (historyWindow.personCount)});
 
         person.personCenterX = 110 * historyWindow.personCount;
         person.personCenterY = 150;
         historyWindow.personCount++;
-    }
-    else
-    {
-        console.log("eventCount < 0");
-        error.visible = true;
 
-    }
 }
 
 function makeAllOtherPropertyBoxesInvisible(person){
@@ -71,33 +63,6 @@ function runUpdate(personObjectName, whichVariable, variable) {
     }
 
 
-}
-
-
-function sortpersons(personObjectName){
-    var i, currentpersonIndex, insertPosition, j, child, parentTimeline = person.parent;
-    console.log(parentTimeline.children.length);
-    for(i=0;i<parentTimeline.children.length;i++){
-        child = parentTimeline.children[i];
-        if(child.objectName == personObjectName){
-            currentpersonIndex = i;
-            break;
-        }
-    }
-    console.log(currentpersonIndex + " current person index");
-    var currentpersonStartDate = Date.parse(parentTimeline.children[currentpersonIndex].personStartDate);
-    for(i=0;i<parentTimeline.children.length - 1;i++){
-        if(currentpersonStartDate >= Date.parse(parentTimeline.children[i].personStartDate) &&
-                currentpersonStartDate < Date.parse(parentTimeline).children[i+1].personStartDate){
-            insertPosition = i+1;
-        }
-    }
-
-    for(j=(parentTimeline.children.length - 1);j>insertPosition;j--){
-        parentTimeline.children[j].placementX += 300;
-    }
-
-    parentTimeline.children[currentpersonIndex].placementX = insertPosition * 300;
 }
 
 /* Calcualtes the angle between the two points */

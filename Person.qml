@@ -22,6 +22,20 @@ Item{
     property int personCenterY
     property alias personButtonProperty:personButton
 
+    Menu{
+        id:personMenu
+        MenuItem{
+            text:qsTr("Delete")
+            onTriggered: person.destroy()
+        }
+        MenuItem{
+            text:qsTr("Properties")
+            onTriggered:{
+                Person.makeAllOtherPropertyBoxesInvisible(person);
+            }
+        }
+    }
+
     Button{
         id:personButton
         radius: width*0.5
@@ -29,6 +43,15 @@ Item{
         height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
         buttonColor: "lightgreen"
+
+        MouseArea{
+            anchors.fill:parent
+            drag.target: person
+            acceptedButtons: Qt.RightButton
+            onClicked: {
+                personMenu.popup();
+            }
+        }
     }
 
     PersonProperties
@@ -36,16 +59,8 @@ Item{
         id:properties
         visible:false
     }
-
-    MouseArea{
-        anchors.fill:parent
-        drag.target: person
-        onClicked: {
-            Person.makeAllOtherPropertyBoxesInvisible(person);
-        }
-
-    }
 }
+
 
 
 
