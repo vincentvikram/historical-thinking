@@ -1,12 +1,12 @@
 function create() {
     var person;
 
-        person = Qt.createComponent("Person.qml").createObject(historyWindow,
-                                {"objectName":"person" + (historyWindow.personCount)});
+    person = Qt.createComponent("Person.qml").createObject(historyWindow,
+                                                           {"objectName":"person" + (historyWindow.personCount)});
 
-        person.personCenterX = 110 * historyWindow.personCount;
-        person.personCenterY = 150;
-        historyWindow.personCount++;
+    person.personCenterX = 110 * historyWindow.personCount;
+    person.personCenterY = 150;
+    historyWindow.personCount++;
 
 }
 
