@@ -36,10 +36,11 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
 
     else{
         historyWindow.timelineCount += 1;
+        historyWindow.timelineNameCount += 1;
 
 
         timeline = Qt.createComponent("Timeline.qml").createObject(historyWindow,
-                                {"objectName": "timeline" + historyWindow.timelineCount});
+                                {"objectName": "timeline" + historyWindow.timelineNameCount});
 
         if((startDateYear != "" && startDateMonth != "" && startDateDate != "")
                 && (endDateYear != "" && endDateDate != "" && endDateMonth != "")){
@@ -138,7 +139,7 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
         }
     }
 
-    console.log("timelinePopulate " + historyWindow.timelineCount);
+//    console.log("timelinePopulate " + historyWindow.timelineNameCount);
     timeline.placementY = 600 + 350 * (historyWindow.timelineCount -1);
     timeline.placementX = 100
 
