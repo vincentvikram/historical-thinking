@@ -12,6 +12,20 @@ import "Person.js" as Person
 ApplicationWindow{
     menuBar:MenuBar{
         Menu {
+            title: "File"
+            MenuItem {
+                text: qsTr("Save")
+                shortcut: "Ctrl+S"
+                onTriggered: {dbConnector.visible = true;}
+            }
+
+            MenuItem {
+                text: qsTr("Exit")
+                shortcut: "Ctrl+Q"
+                onTriggered: {Event.create();}
+            }
+        }
+        Menu {
             title: "New"
             MenuItem {
                 text: qsTr("Timeline")
@@ -82,6 +96,19 @@ ApplicationWindow{
                 }
             }
         }
+        Menu {
+            title: "Help"
+            MenuItem {
+                text: qsTr("About")
+                onTriggered: {timelineDialog.visible = true;}
+            }
+
+            MenuItem {
+                text: qsTr("Help is here")
+                shortcut: "F1"
+                onTriggered: {Event.create();}
+            }
+        }
     }
     ScrollView{
         id:scrollableWindow
@@ -110,13 +137,15 @@ ApplicationWindow{
                 //Update to DATABASE
             }
 
-
+            DbConnection{
+                id:dbConnector
+                visible:false
+            }
 
             TimelineDialog{
                 id:timelineDialog
                 visible:false
             }
-
             ErrorWindow{
                 id:error
                 visible:false
