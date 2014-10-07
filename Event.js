@@ -24,6 +24,21 @@ function create() {
 
 }
 
+function makeAllOtherPropertyBoxesInvisible(event){
+
+    var i=0;
+
+    for(;i<event.parent.children.length;i++){
+        if(event.parent.children[i].objectName.indexOf("event") != -1){
+            if(event.parent.children[i].propertiesVisible){
+                event.parent.children[i].propertiesVisible = false;
+            }
+        }
+    }
+
+    event.propertiesVisible = true;
+}
+
 function runUpdate(eventObjectName, whichVariable, variable) {
     var i, parentTimeline = event.parent, child;
 
@@ -61,33 +76,6 @@ function runUpdate(eventObjectName, whichVariable, variable) {
     }
 
 
-}
-
-
-function sortEvents(eventObjectName){
-    var i, currentEventIndex, insertPosition, j, child, parentTimeline = event.parent;
-    console.log(parentTimeline.children.length);
-    for(i=0;i<parentTimeline.children.length;i++){
-        child = parentTimeline.children[i];
-        if(child.objectName == eventObjectName){
-            currentEventIndex = i;
-            break;
-        }
-    }
-    console.log(currentEventIndex + " current event index");
-    var currentEventStartDate = Date.parse(parentTimeline.children[currentEventIndex].eventStartDate);
-    for(i=0;i<parentTimeline.children.length - 1;i++){
-        if(currentEventStartDate >= Date.parse(parentTimeline.children[i].eventStartDate) &&
-                currentEventStartDate < Date.parse(parentTimeline).children[i+1].eventStartDate){
-            insertPosition = i+1;
-        }
-    }
-
-    for(j=(parentTimeline.children.length - 1);j>insertPosition;j--){
-        parentTimeline.children[j].placementX += 300;
-    }
-
-    parentTimeline.children[currentEventIndex].placementX = insertPosition * 300;
 }
 
 /* Calcualtes the angle between the two points */

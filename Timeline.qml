@@ -1,5 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
+import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.1
+import "."
 
 Item{
     id:timelineParent
@@ -18,7 +21,7 @@ Item{
 
     Line {
         id:timeline
-        height: 2
+        height: 5
         y:placementY
         x:placementX
         rotation:0
@@ -43,5 +46,26 @@ Item{
             text: timePeriodProperty
         }
 
+
+        MouseArea{
+            anchors.fill:timeline
+            acceptedButtons: Qt.RightButton
+
+            onClicked:{
+                    timelineMenu.popup()
+            }
+        }
+
+    }
+
+    Menu{
+        id:timelineMenu
+        MenuItem{
+            text:qsTr("Delete")
+            onTriggered: {
+                timeline.destroy()
+                historyWindow.timelineCount -= 1;
+            }
+        }
     }
 }

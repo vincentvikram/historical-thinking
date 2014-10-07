@@ -15,6 +15,7 @@ Item{
     property string eventDescription
     property string eventName
     property string eventImagePath
+    property alias propertiesVisible:properties.visible
     property int centerX: event.x + event.width/2
     property int centerY: event.y + event.height/2
     property alias eventButtonProperty:eventButton
@@ -22,15 +23,31 @@ Item{
     property variant eventPeople
     property variant associatedTimelineObjectName
 
+    Menu{
+        id:eventMenu
+        MenuItem{
+            text:qsTr("Delete")
+            onTriggered: event.destroy()
+        }
+        MenuItem{
+            text:qsTr("Properties")
+            onTriggered: Event.makeAllOtherPropertyBoxesInvisible(event);
+        }
+    }
+
     Button{
         id:eventButton
         width: 100/1366 * Screen.desktopAvailableWidth
         height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
         buttonColor: "lightblue"
+
         MouseArea{
             anchors.fill:parent
-            onClicked: properties.visible = true;
+            acceptedButtons: Qt.RightButton
+            onClicked: {
+                    eventMenu.popup()
+            }
             drag.target:eventButton
 
             onPositionChanged: {
@@ -44,6 +61,8 @@ Item{
         id:properties
         visible:false
     }
+
+
 }
 
 
