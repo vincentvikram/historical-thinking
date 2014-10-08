@@ -3,7 +3,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "Line.js" as Line
+import "../controller/Line.js" as Line
 
 Item{
     id:event
@@ -24,34 +24,34 @@ Item{
     property variant eventPeople
     property variant associatedTimelineObjectName*/
 
-    Menu{
-        id:eventMenu
-        MenuItem{
-            text:qsTr("Delete")
-            onTriggered: {
-                event.destroy();
-                historyWindow.eventCount -= 1;
-            }
-        }
-        MenuItem{
-            text:qsTr("Properties")
-            onTriggered: Event.makeAllOtherPropertyBoxesInvisible(event);
-        }
-    }
+//    Menu{
+//        id:eventMenu
+//        MenuItem{
+//            text:qsTr("Delete")
+//            onTriggered: {
+//                event.destroy();
+//                historyWindow.eventCount -= 1;
+//            }
+//        }
+//        MenuItem{
+//            text:qsTr("Properties")
+//            onTriggered: Event.makeAllOtherPropertyBoxesInvisible(event);
+//        }
+//    }
 
     Rectangle {
         id: basicline
         property alias z1:l.z
-    property alias x1: l.x
-    property alias y1: l.y
+        property alias x1: l.x
+        property alias y1: l.y
 
-    property real x2: l.x
-    property real y2: l.y
+        property real x2: l.x
+        property real y2: l.y
 
-    color: "black"
-    height: 2
-    smooth: true;
-    }    
+        color: "black"
+        height: 2
+        smooth: true;
+    }
     /*Button{
         id:eventButton
         width: 100/1366 * Screen.desktopAvailableWidth
@@ -71,11 +71,11 @@ Item{
         }
     }*/
 
-    EventProperties
-    {
-        id:properties
-        visible:false
-    }
+//    EventProperties
+//    {
+//        id:properties
+//        visible:false
+//    }
 
 
 }
@@ -85,7 +85,7 @@ Item{
 import "."
 import "Line.js" as Line
 
- 
+
 Item {
     id:basicline
     width:100/1366 * Screen.desktopAvailableWidth
@@ -113,35 +113,35 @@ Item {
             onTriggered:{
                 Line.makeAllOtherPropertyBoxesInvisible(basicline);
             }
-        }        
+        }
     }
 
     Rectangle {
         id: basicline
         property alias x1: l.x
         property alias y1: l.y
-     
+
         property real x2: l.x
         property real y2: l.y
-     
+
         color: "red"
         width: 100/1366 * Screen.desktopAvailableWidth
         height: 500/768 * Screen.desktopAvailableHeight
         smooth: true;
 
-     
+
         transformOrigin: Item.TopLeft;
-     
+
         width: getWidth(x1,y1,x2,y2);
         rotation: getSlope(x1,y1,x2,y2);
-     
+
         function getWidth(sx1,sy1,sx2,sy2)
         {
             var w=Math.sqrt(Math.pow((sx2-sx1),2)+Math.pow((sy2-sy1),2));
             console.debug("W: "+w);
             return w;
         }
-     
+
         function getSlope(sx1,sy1,sx2,sy2)
         {
             var a,m,d;
@@ -151,7 +151,7 @@ Item {
             a=sy2-sy1;
             m=a/b;
             d=Math.atan(m)*180/Math.PI;
-     
+
             if (a<0 && b<0)
                 return d+180;
             else if (a>=0 && b>=0)

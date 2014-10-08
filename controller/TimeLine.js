@@ -39,7 +39,7 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
         historyWindow.timelineNameCount += 1;
 
 
-        timeline = Qt.createComponent("Timeline.qml").createObject(historyWindow,
+        timeline = Qt.createComponent("../view/Timeline.qml").createObject(historyWindow,
                                                                    {"objectName": "timeline" + historyWindow.timelineNameCount});
 
         if((startDateYear != "" && startDateMonth != "" && startDateDate != "")

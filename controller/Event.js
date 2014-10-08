@@ -3,7 +3,7 @@ function create() {
 
     if(historyWindow.timelineCount > 0)
     {
-        event = Qt.createComponent("Event.qml").createObject(historyWindow,
+        event = Qt.createComponent("../view/Event.qml").createObject(historyWindow,
                                                              {"objectName":"event" + (historyWindow.eventNameCount)});
         event.y = 0;
         event.x = 110*historyWindow.eventCount;

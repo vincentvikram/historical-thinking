@@ -5,10 +5,11 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Layouts 1.0
 
 import "."
-import "Event.js" as Event
-import "TimeLine.js" as Timeline
-import "Person.js" as Person
-import "Line.js" as Line
+import "../controller/Line.js" as Line
+import "../model"
+import "../controller/Event.js" as Event
+import "../controller/TimeLine.js" as Timeline
+import "../controller/Person.js" as Person
 
 ApplicationWindow{
     id:applicationWindow

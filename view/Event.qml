@@ -3,7 +3,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "Event.js" as Event
+import "../controller/Event.js" as Event
 
 Item{
     id:event

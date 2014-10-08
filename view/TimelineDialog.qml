@@ -3,7 +3,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "TimeLine.js" as Timeline
+import "../controller/TimeLine.js" as Timeline
 
 Item {
     id: dialogComponent

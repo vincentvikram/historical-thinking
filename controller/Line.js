@@ -3,7 +3,7 @@ function create() {
 
     if(historyWindow.timelineCount > 0)
     {
-        basicline = Qt.createComponent("BasicLine.qml").createObject(historyWindow,
+        basicline = Qt.createComponent("../view/BasicLine.qml").createObject(historyWindow,
                                                              {"objectName":"basicline" + (historyWindow.basiclineNameCount)});
         basicline.y = 0;
         basicline.x = 110*historyWindow.basiclineCount;

@@ -2,7 +2,7 @@ function create() {
     var person;
 
     if(historyWindow.eventCount > 0){
-    person = Qt.createComponent("Person.qml").createObject(historyWindow,
+    person = Qt.createComponent("../view/Person.qml").createObject(historyWindow,
                                 {"objectName":"person" + (historyWindow.personNameCount)});
 
     person.personCenterX = 110 * historyWindow.personCount;
