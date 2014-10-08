@@ -27,7 +27,10 @@ Item{
         id:eventMenu
         MenuItem{
             text:qsTr("Delete")
-            onTriggered: event.destroy()
+            onTriggered: {
+                event.destroy();
+                historyWindow.eventCount -= 1;
+            }
         }
         MenuItem{
             text:qsTr("Properties")
