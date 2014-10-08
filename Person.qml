@@ -26,7 +26,10 @@ Item{
         id:personMenu
         MenuItem{
             text:qsTr("Delete")
-            onTriggered: person.destroy()
+            onTriggered: {
+                person.destroy();
+                historyWindow.personCount -= 1;
+            }
         }
         MenuItem{
             text:qsTr("Properties")
