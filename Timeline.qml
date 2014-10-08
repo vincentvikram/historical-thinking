@@ -32,18 +32,48 @@ Item{
             id: startDate
             text: startDateText
             x:timeline.x - 200/1366 * Screen.desktopAvailableWidth
+
+
+            MouseArea{
+                anchors.fill:startDate
+                acceptedButtons: Qt.RightButton
+
+                onClicked:{
+                        timelineMenu.popup()
+                }
+            }
         }
 
         Text {
             id: endDate
             x:timeline.width
             text: endDateText
+
+
+            MouseArea{
+                anchors.fill:endDate
+                acceptedButtons: Qt.RightButton
+
+                onClicked:{
+                        timelineMenu.popup()
+                }
+            }
         }
 
         Text {
             id: timePeriod
             x:timeline.width/2
             text: timePeriodProperty
+
+
+            MouseArea{
+                anchors.fill:timePeriod
+                acceptedButtons: Qt.RightButton
+
+                onClicked:{
+                        timelineMenu.popup()
+                }
+            }
         }
 
 

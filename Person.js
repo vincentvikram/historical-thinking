@@ -1,12 +1,21 @@
 function create() {
     var person;
 
-        person = Qt.createComponent("Person.qml").createObject(historyWindow,
-                                {"objectName":"person" + (historyWindow.personCount)});
+    if(historyWindow.eventCount > 0){
+    person = Qt.createComponent("Person.qml").createObject(historyWindow,
+                                {"objectName":"person" + (historyWindow.personNameCount)});
 
-        person.personCenterX = 110 * historyWindow.personCount;
-        person.personCenterY = 150;
-        historyWindow.personCount++;
+    person.personCenterX = 110 * historyWindow.personCount;
+    person.personCenterY = 150;
+    historyWindow.personCount++;
+        historyWindow.personNameCount++;
+    }
+    else
+    {
+        error.visible = true;
+        error.errorMessageProperty = "People can only be added to events!"
+
+    }
 
 }
 

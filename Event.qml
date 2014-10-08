@@ -27,7 +27,10 @@ Item{
         id:eventMenu
         MenuItem{
             text:qsTr("Delete")
-            onTriggered: event.destroy()
+            onTriggered: {
+                event.destroy();
+                historyWindow.eventCount -= 1;
+            }
         }
         MenuItem{
             text:qsTr("Properties")
@@ -44,14 +47,12 @@ Item{
 
         MouseArea{
             anchors.fill:parent
-            acceptedButtons: Qt.RightButton
+            drag.target: eventButton
+            acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
-                    eventMenu.popup()
-            }
-            drag.target:eventButton
-
-            onPositionChanged: {
-                console.log(event.x + "  " + event.y);
+                if(mouse.button == Qt.RightButton){
+                    eventMenu.popup();
+                }
             }
         }
     }

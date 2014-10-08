@@ -26,7 +26,10 @@ Item{
         id:personMenu
         MenuItem{
             text:qsTr("Delete")
-            onTriggered: person.destroy()
+            onTriggered: {
+                person.destroy();
+                historyWindow.personCount -= 1;
+            }
         }
         MenuItem{
             text:qsTr("Properties")
@@ -46,10 +49,12 @@ Item{
 
         MouseArea{
             anchors.fill:parent
-            drag.target: person
-            acceptedButtons: Qt.RightButton
+            drag.target:person
+            acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
-                personMenu.popup();
+                if(mouse.button == Qt.RightButton){
+                    personMenu.popup();
+                }
             }
         }
     }

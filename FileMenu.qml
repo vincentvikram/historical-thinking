@@ -114,18 +114,27 @@ ApplicationWindow{
             }
         }
     }
+
+
     ScrollView{
         id:scrollableWindow
         width:parent.width
         height:parent.height
+
+        ErrorWindow{
+            id:error
+            visible:false
+        }
         Item{
             id:historyWindow
             focus:true
             width:parent.width
             height:parent.height
             property int eventCount:0
+            property int eventNameCount:0
             property int timelineNameCount: 0
             property int timelineCount: 0
+            property int personNameCount: 0
             property int personCount: 0
             property int linkCount: 0
             property variant timelineSelected
@@ -146,11 +155,6 @@ ApplicationWindow{
                 id:timelineDialog
                 visible:false
             }
-            ErrorWindow{
-                id:error
-                visible:false
-            }
-
             MouseArea{
                 anchors.fill:parent
                 acceptedButtons: Qt.RightButton

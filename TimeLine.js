@@ -5,15 +5,15 @@
 function dateDiff( str1, str2 ) {
     var diff = Date.parse( str2 ) - Date.parse( str1 );
     return isNaN( diff ) ? NaN : {
-        diff : diff,
-        ms : Math.floor( diff            % 1000 ),
-        d  : Math.floor( diff / 86400000        ),
-        m  : Math.floor( diff / (86400000 * 30)),
-        y  : Math.floor( diff / (86400000 * 30 * 12)),
-        D  : Math.floor( diff / (86400000 * 30 * 12 * 10)),
-        C  : Math.floor( diff / (86400000 * 30 * 12 * 10 * 10)),
-        M  : Math.floor( diff / (86400000 * 30 * 12 * 1000)),
-    };
+                               diff : diff,
+                               ms : Math.floor( diff            % 1000 ),
+                               d  : Math.floor( diff / 86400000        ),
+                               m  : Math.floor( diff / (86400000 * 30)),
+                               y  : Math.floor( diff / (86400000 * 30 * 12)),
+                               D  : Math.floor( diff / (86400000 * 30 * 12 * 10)),
+                               C  : Math.floor( diff / (86400000 * 30 * 12 * 10 * 10)),
+                               M  : Math.floor( diff / (86400000 * 30 * 12 * 1000)),
+                           };
 }
 function populate(timelineArray,startDateDate, startDateMonth, startDateYear, endDateDate,
                   endDateMonth,endDateYear, period, adChecked1, bcChecked1, adChecked2,
@@ -40,7 +40,7 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
 
 
         timeline = Qt.createComponent("Timeline.qml").createObject(historyWindow,
-                                {"objectName": "timeline" + historyWindow.timelineNameCount});
+                                                                   {"objectName": "timeline" + historyWindow.timelineNameCount});
 
         if((startDateYear != "" && startDateMonth != "" && startDateDate != "")
                 && (endDateYear != "" && endDateDate != "" && endDateMonth != "")){
@@ -139,7 +139,7 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
         }
     }
 
-//    console.log("timelinePopulate " + historyWindow.timelineNameCount);
+    //    console.log("timelinePopulate " + historyWindow.timelineNameCount);
     timeline.placementY = 600 + 350 * (historyWindow.timelineCount -1);
     timeline.placementX = 100
 
@@ -158,11 +158,11 @@ function whichTimeline(mouseX, mouseY){
 
             if(Math.sqrt(
                         Math.pow((historyWindow.children[i].placementX - mouseX),2) +
-            Math.pow((historyWindow.children[i].placementY - mouseY),2)) < distance){
+                        Math.pow((historyWindow.children[i].placementY - mouseY),2)) < distance){
 
                 distance = Math.sqrt(
                             Math.pow((historyWindow.children[i].placementX - mouseX),2) +
-                Math.pow((historyWindow.children[i].placementY - mouseY),2));
+                            Math.pow((historyWindow.children[i].placementY - mouseY),2));
 
                 closestTimeline = historyWindow.children[i];
             }
