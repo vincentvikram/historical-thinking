@@ -47,14 +47,12 @@ Item{
 
         MouseArea{
             anchors.fill:parent
-            acceptedButtons: Qt.RightButton
+            drag.target: eventButton
+            acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
-                    eventMenu.popup()
-            }
-            drag.target:eventButton
-
-            onPositionChanged: {
-                console.log(event.x + "  " + event.y);
+                if(mouse.button == Qt.RightButton){
+                    eventMenu.popup();
+                }
             }
         }
     }

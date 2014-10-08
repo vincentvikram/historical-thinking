@@ -49,10 +49,12 @@ Item{
 
         MouseArea{
             anchors.fill:parent
-            drag.target: person
-            acceptedButtons: Qt.RightButton
+            drag.target:person
+            acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
-                personMenu.popup();
+                if(mouse.button == Qt.RightButton){
+                    personMenu.popup();
+                }
             }
         }
     }
