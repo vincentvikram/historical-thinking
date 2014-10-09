@@ -105,27 +105,27 @@ Item {
                     exclusiveGroup: endDateRadioButtons
                 }
             }
-            Row{
-                Text{
-                    text:"Time period"
-                }
+//            Row{
+//                Text{
+//                    text:"Time period"
+//                }
 
-                TextField{
-
-                    id:period
-                    validator: IntValidator {bottom:1; top:2147483647}
-                    placeholderText: qsTr("Time Period")
-                }
-                ComboBox{
-                    id:periodUnit
-                    model:["s","min","h","d","m","y","D","C","M"]
-                }
-            }
+//                TextField{
+//
+//                    id:period
+//                    validator: IntValidator {bottom:1; top:2147483647}
+//                    placeholderText: qsTr("Time Period")
+//               }
+//                ComboBox{
+//                    id:periodUnit
+//                    model:["s","min","h","d","m","y","D","C","M"]
+//                }
+//            }
 
             Row{
                 spacing: 5
                 Text{
-                    text:"SCALE:"
+                    text:"Scale:"
                 }
                 ComboBox{
                     id:scaleUnit
@@ -145,8 +145,7 @@ Item {
 
             Button{
                 id:ok
-
-
+                buttonLabel: "Ok"
                 onButtonClick:
                 {
                     console.log(scaleUnit.currentText);
@@ -161,10 +160,8 @@ Item {
             Button{
                 id:close
                 buttonLabel: "Close"
-                x: ok.x + 100
-                y:ok.y
-
-
+//              x: ok.x + 100 //The x and y positioning does not do things as expected
+//              y:ok.y      // We need to check this out. till then default position
                 onButtonClick:
                 {
                     dialogComponent.visible = false;
