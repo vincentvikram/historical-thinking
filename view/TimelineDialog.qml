@@ -149,10 +149,12 @@ Item {
                 onButtonClick:
                 {
                     console.log(scaleUnit.currentText);
+//                    Timeline.populate(timelineArray,startDateDate.text,startDateMonth.text,
+//                                       startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
+//                                       bcEndDate.checked, periodUnit, scale.text, scaleUnit.currentText);
                     Timeline.populate(timelineArray,startDateDate.text,startDateMonth.text,
-                                       startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text,
-                                       period.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
-                                       bcEndDate.checked, periodUnit, scale.text, scaleUnit.currentText);
+                                       startDateYear.text, endDateDate.text,endDateMonth.text, endDateYear.text, adStartDate.checked,bcStartDate.checked, adEndDate.checked,
+                                       bcEndDate.checked, scale.text, scaleUnit.currentText);
                     dialogComponent.visible = false;
                 }
 
