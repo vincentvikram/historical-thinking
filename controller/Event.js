@@ -4,7 +4,7 @@ function create() {
     if(historyWindow.timelineCount > 0)
     {
         event = Qt.createComponent("../view/Event.qml").createObject(historyWindow,
-                                                             {"objectName":"event" + (historyWindow.eventNameCount)});
+                                    {"objectName":"event" + (historyWindow.eventNameCount)});
         event.y = 0;
         event.x = 110*historyWindow.eventCount;
 
@@ -25,12 +25,12 @@ function create() {
 
 }
 
-/*function makeAllOtherPropertyBoxesInvisible(event){
+function makeAllOtherPropertyBoxesInvisible(event){
 
     var i=0;
 
     for(;i<event.parent.children.length;i++){
-        if(event.parent.children[i].objectName.indexOf("event") != -1){
+        if(event.parent.children[i] && event.parent.children[i].objectName.indexOf("event") != -1){
             if(event.parent.children[i].propertiesVisible){
                 event.parent.children[i].propertiesVisible = false;
             }
@@ -38,9 +38,9 @@ function create() {
     }
 
     event.propertiesVisible = true;
-}*/
+}
 
-/*function runUpdate(eventObjectName, whichVariable, variable) {
+function runUpdate(eventObjectName, whichVariable, variable) {
     var i, parentTimeline = event.parent, child;
 
     for(i=0;i<parentTimeline.children.length;i++)
@@ -80,7 +80,7 @@ function create() {
 }
 
 /* Calcualtes the angle between the two points */
-/*function getAngle(sx1, sy1, sx2, sy2)
+function getAngle(sx1, sy1, sx2, sy2)
 {
     var dy, slope, angle;
     var dx = sx2 - sx1;
@@ -107,8 +107,8 @@ function create() {
 }
 
 /* Draw a line dynamically to display the drag */
-/*function drawLine(element1,mainWindow, x1, y1, x2, y2){*/
-/*    console.log("draw line");
+function drawLine(element1,mainWindow, x1, y1, x2, y2){
+   console.log("draw line");
     historyWindow.linkCount++;
     var line = Qt.createComponent("Link.qml").createObject(mainWindow,
                                                            {"objectName":"link" + historyWindow.linkCount});
@@ -164,13 +164,12 @@ function eventDragged(event, differenceX, differenceY){
     }
 }
 
-//function getPersonPosition(person, i){
-//    var positionsArray = [{"x":(person.x + person.width),"y":person.y},
-//                          {"x":(person.x+person.width),"y":(person.y  - person.height)},
-//                          {"x":person.x,"y":(person.y  - person.height)},
-//                          {"x":(person.x-person.width),"y":(person.y  - person.height)},
-//                          {"x":person.x - person.width,"y":person.y}];
+function getPersonPosition(person, i){
+    var positionsArray = [{"x":(person.x + person.width),"y":person.y},
+                          {"x":(person.x+person.width),"y":(person.y  - person.height)},
+                          {"x":person.x,"y":(person.y  - person.height)},
+                          {"x":(person.x-person.width),"y":(person.y  - person.height)},
+                          {"x":person.x - person.width,"y":person.y}];
 
-//    return positionsArray[i-2];
-//}
-*/
+    return positionsArray[i-2];
+}
