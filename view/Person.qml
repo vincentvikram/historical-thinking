@@ -3,68 +3,69 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "Event.js" as Event
+import "../controller/Person.js" as Person
 
 Item{
-    id:event
+    id:person
     width:100/1366 * Screen.desktopAvailableWidth
     height:100/768 * Screen.desktopAvailableHeight
+    x:personCenterX
+    y:personCenterY
 
-    property string eventStartDate
-    property string eventEndDate
-    property string eventDescription
-    property string eventName
-    property string eventImagePath
+    property string personStartDate
     property alias propertiesVisible:properties.visible
-    property int centerX: event.x + event.width/2
-    property int centerY: event.y + event.height/2
-    property alias eventButtonProperty:eventButton
-
-    property variant eventPeople
-    property variant associatedTimelineObjectName
+    property string personEndDate
+    property string personDescription
+    property string personName
+    property string personImagePath
+    property int personCenterX
+    property int personCenterY
+    property alias personButtonProperty:personButton
 
     Menu{
-        id:eventMenu
+        id:personMenu
         MenuItem{
             text:qsTr("Delete")
             onTriggered: {
-                event.destroy();
-                historyWindow.eventCount -= 1;
+                person.destroy();
+                historyWindow.personCount -= 1;
             }
         }
         MenuItem{
             text:qsTr("Properties")
-            onTriggered: Event.makeAllOtherPropertyBoxesInvisible(event);
+            onTriggered:{
+                Person.makeAllOtherPropertyBoxesInvisible(person);
+            }
         }
     }
 
     Button{
-        id:eventButton
+        id:personButton
+        radius: width*0.5
         width: 100/1366 * Screen.desktopAvailableWidth
         height: 100/768 * Screen.desktopAvailableHeight
         buttonLabel: "Click to\nadd name"
-        buttonColor: "lightblue"
+        buttonColor: "lightgreen"
 
         MouseArea{
             anchors.fill:parent
-            drag.target: eventButton
+            drag.target:person
             acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
                 if(mouse.button == Qt.RightButton){
-                    eventMenu.popup();
+                    personMenu.popup();
                 }
             }
         }
     }
 
-    EventProperties
+    PersonProperties
     {
         id:properties
         visible:false
     }
-
-
 }
+
 
 
 

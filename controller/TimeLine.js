@@ -15,17 +15,20 @@ function dateDiff( str1, str2 ) {
                                M  : Math.floor( diff / (86400000 * 30 * 12 * 1000)),
                            };
 }
-function populate(timelineArray,startDateDate, startDateMonth, startDateYear, endDateDate,
-                  endDateMonth,endDateYear, period, adChecked1, bcChecked1, adChecked2,
-                  bcChecked2,periodUnit,scale,scaleUnit) {
+//function populate(timelineArray,startDateDate, startDateMonth, startDateYear, endDateDate,
+//                  endDateMonth,endDateYear, adChecked1, bcChecked1, adChecked2,
+//                  bcChecked2,periodUnit,scale,scaleUnit) {
 
+function populate(timelineArray,startDateDate, startDateMonth, startDateYear, endDateDate,
+                  endDateMonth,endDateYear, adChecked1, bcChecked1, adChecked2,
+                  bcChecked2,scale,scaleUnit) {
     var timeline, startDate, endDate,difference;
 
     var startDateMilliseconds, endDateMilliseconds;
 
     //1)Check if at least two entities are entered. Either StartDate/Period or EndDAte/Period or StartDate/EndDAte
 
-    if((startDateYear == "" || endDateYear =="") && period == ""){
+    if((startDateYear == "" || endDateYear =="")){
         console.log("Need at least two parameters")
     }
 
@@ -39,7 +42,7 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
         historyWindow.timelineNameCount += 1;
 
 
-        timeline = Qt.createComponent("Timeline.qml").createObject(historyWindow,
+        timeline = Qt.createComponent("../view/Timeline.qml").createObject(historyWindow,
                                                                    {"objectName": "timeline" + historyWindow.timelineNameCount});
 
         if((startDateYear != "" && startDateMonth != "" && startDateDate != "")
@@ -57,86 +60,86 @@ function populate(timelineArray,startDateDate, startDateMonth, startDateYear, en
             endDate = new Date(endDate);
             timeline.endDateProperty = endDate;
 
-            if(period == "" || !isNan(parseInt(period))){
-                timeline.timePeriodProperty = period;
-            }
+//            if(period == "" || !isNan(parseInt(period))){
+//                timeline.timePeriodProperty = period;
+//            }
 
             calculateLength(timeline,startDate,endDate,scale,scaleUnit)
 
         }
 
-        //3)If start date and Timeline are entered, put them in timeline qml
-        else if(startDateYear != "" && period != "" && !isNaN(parseInt(period))){
-            startDate = startDateMonth + " " + startDateDate + ", " +  startDateYear;
-            timeline.startDateText = startDate;
-            startDate = new Date(startDate);
-            timeline.startDateProperty = startDate;
+//        //3)If start date and Timeline are entered, put them in timeline qml
+//        else if(startDateYear != "" && period != "" && !isNaN(parseInt(period))){
+//            startDate = startDateMonth + " " + startDateDate + ", " +  startDateYear;
+//            timeline.startDateText = startDate;
+//            startDate = new Date(startDate);
+//            timeline.startDateProperty = startDate;
 
-            timeline.timePeriodProperty = period;
+//            timeline.timePeriodProperty = period;
 
-            if(endDateDate != "" && endDateMonth != "" && endDateYear != ""){
-                endDate = endDateMonth + " " + endDateDate + ", " +  endDateYear;
-                timeline.endDateText = endDate;
-                endDate = new Date(endDate);
-                timeline.endDateProperty = endDate;
+//            if(endDateDate != "" && endDateMonth != "" && endDateYear != ""){
+//                endDate = endDateMonth + " " + endDateDate + ", " +  endDateYear;
+//                timeline.endDateText = endDate;
+//                endDate = new Date(endDate);
+//                timeline.endDateProperty = endDate;
 
-                calculateLength(timeline,startDate,endDate,scale,scaleUnit)
-            }
-            else
-            {
-                startDateMilliseconds = Date.parse(startDate);
-                switch(periodUnit){
-                case "s":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * parseInt(period);
-                    break;
-                case "mi":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * parseInt(period);
-                    break;
-                case "h":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * parseInt(period);
-                    break;
-                case "d":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * parseInt(period);
-                    break;
-                case "m":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * parseInt(period);
-                    break;
-                case "y":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * parseInt(period)
-                    break;
-                case "D":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * parseInt(period)
-                    break;
-                case "C":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * 10 * parseInt(period)
-                    break;
-                case "M":
-                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * 10 * 10 * parseInt(period)
-                    break;
-                }
-                endDate = new Date(endDateMilliseconds);
-                calculateLength(timeline,startDate,endDate,scale,scaleUnit)
-            }
+//                calculateLength(timeline,startDate,endDate,scale,scaleUnit)
+//            }
+//            else
+//            {
+//                startDateMilliseconds = Date.parse(startDate);
+//                switch(periodUnit){
+//                case "s":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * parseInt(period);
+//                    break;
+//                case "mi":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * parseInt(period);
+//                    break;
+//                case "h":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * parseInt(period);
+//                    break;
+//                case "d":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * parseInt(period);
+//                    break;
+//                case "m":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * parseInt(period);
+//                    break;
+//                case "y":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * parseInt(period)
+//                    break;
+//                case "D":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * parseInt(period)
+//                    break;
+//                case "C":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * 10 * parseInt(period)
+//                    break;
+//                case "M":
+//                    endDateMilliseconds = startDateMilliseconds + 1000 * 60 * 60 * 24 * 30 * 12 * 10 * 10 * 10 * parseInt(period)
+//                    break;
+//                }
+//                endDate = new Date(endDateMilliseconds);
+//                calculateLength(timeline,startDate,endDate,scale,scaleUnit)
+//            }
 
-        }
+//        }
 
-        //4//3)If end date and Timeline are entered, put them in timeline qml
-        else if(endDateYear != "" && period != "" && !isNaN(parseInt(period))){
-            endDate = endDateMonth + " " + endDateDate + ", " +  endDateYear;
-            timeline.endDateText = endDate;
-            endDate = new Date(endDate);
-            timeline.endDateProperty = endDate;
+//        //4//3)If end date and Timeline are entered, put them in timeline qml
+//        else if(endDateYear != "" && period != "" && !isNaN(parseInt(period))){
+//            endDate = endDateMonth + " " + endDateDate + ", " +  endDateYear;
+//            timeline.endDateText = endDate;
+//            endDate = new Date(endDate);
+//            timeline.endDateProperty = endDate;
 
 
-            timeline.timePeriodProperty = period;
+//            timeline.timePeriodProperty = period;
 
-            if(startDateDate != "" && startDateMonth != "" && startDateYear != ""){
-                startDate = startDateMonth + " " + startDateDate + ", " +  startDateYear;
-                timeline.startDateText = startDate;
-                startDate = new Date(startDate);
-                timeline.startDateProperty = startDate;
-            }
-        }
+//            if(startDateDate != "" && startDateMonth != "" && startDateYear != ""){
+//                startDate = startDateMonth + " " + startDateDate + ", " +  startDateYear;
+//                timeline.startDateText = startDate;
+//                startDate = new Date(startDate);
+//                timeline.startDateProperty = startDate;
+//            }
+//        }
     }
 
     //    console.log("timelinePopulate " + historyWindow.timelineNameCount);

@@ -6,7 +6,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
 import "."
-import "Event.js" as Event
+import "../controller/Event.js" as Event
 
 // Use an item as container to group both the overlay and the dialog
 // I do this because the overlay itself has an opacity set, and otherwise
@@ -109,7 +109,7 @@ Rectangle{
                                     Qt.createQmlObject(
                                                 'import QtQuick 2.2; import QtQuick.Controls 1.2; TextField {id: tf'
                                                 + filterCount +
-                                                '; width: 90;height: 30;}',filterContainer);
+                                                '; width: 90;height: 30;}',filterContainer,"filterError");
                                     console.log(filterCount)
                                     filterCount++;
                                 }
@@ -119,19 +119,39 @@ Rectangle{
                     Button{
                         id:addImage
 
-                        buttonLabel: "Add Images"
-
+                        buttonLabel: "Add Media"
+                        Menu{
+                            id:imageMenu
+                            MenuItem{
+                                text:qsTr("Images")
+                                onTriggered: {
+                                    if(imageCount < 7){
+                                        Qt.createQmlObject("import QtQuick 2.0; Image{ id:img"
+                                                           + imageCount + "; objectName:img"
+                                                           + imageCount +";width:100; height:100;}",
+                                                           imageContainer,"imageError");
+                                        fileDialog.open()
+                                    }
+                                }
+                            }
+                            MenuItem{
+                                text:qsTr("Video")
+                                onTriggered: {
+                                    if(imageCount < 7){
+                                        Qt.createQmlObject("import QtQuick 2.0; Image{ id:img"
+                                                           + imageCount + "; objectName:img"
+                                                           + imageCount +";width:100; height:100;}",
+                                                           imageContainer,"imageError");
+                                        fileDialog.open()
+                                    }
+                                }
+                            }
+                        }
                         MouseArea{
                             anchors.fill:parent
 
                             onClicked:{
-                                if(imageCount < 7){
-                                    Qt.createQmlObject("import QtQuick 2.0; Image{ id:img"
-                                                       + imageCount + ";width:100; height:100;}",
-                                                       imageContainer,"imageError");
-                                    fileDialog.open()
-                                }
-
+                                imageMenu.popup()
                             }
                         }
                     }
