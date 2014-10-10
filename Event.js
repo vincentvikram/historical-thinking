@@ -25,7 +25,7 @@ function create() {
 
 }
 
-function makeAllOtherPropertyBoxesInvisible(event){
+/*function makeAllOtherPropertyBoxesInvisible(event){
 
     var i=0;
 
@@ -38,9 +38,9 @@ function makeAllOtherPropertyBoxesInvisible(event){
     }
 
     event.propertiesVisible = true;
-}
+}*/
 
-function runUpdate(eventObjectName, whichVariable, variable) {
+/*function runUpdate(eventObjectName, whichVariable, variable) {
     var i, parentTimeline = event.parent, child;
 
     for(i=0;i<parentTimeline.children.length;i++)
@@ -80,7 +80,7 @@ function runUpdate(eventObjectName, whichVariable, variable) {
 }
 
 /* Calcualtes the angle between the two points */
-function getAngle(sx1, sy1, sx2, sy2)
+/*function getAngle(sx1, sy1, sx2, sy2)
 {
     var dy, slope, angle;
     var dx = sx2 - sx1;
@@ -107,8 +107,8 @@ function getAngle(sx1, sy1, sx2, sy2)
 }
 
 /* Draw a line dynamically to display the drag */
-function drawLine(element1,mainWindow, x1, y1, x2, y2){
-    console.log("draw line");
+/*function drawLine(element1,mainWindow, x1, y1, x2, y2){*/
+/*    console.log("draw line");
     historyWindow.linkCount++;
     var line = Qt.createComponent("Link.qml").createObject(mainWindow,
                                                            {"objectName":"link" + historyWindow.linkCount});
@@ -173,3 +173,4 @@ function eventDragged(event, differenceX, differenceY){
 
 //    return positionsArray[i-2];
 //}
+*/

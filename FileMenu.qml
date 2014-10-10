@@ -8,6 +8,7 @@ import "."
 import "Event.js" as Event
 import "TimeLine.js" as Timeline
 import "Person.js" as Person
+import "Line.js" as Line
 
 ApplicationWindow{
     id:applicationWindow
@@ -56,10 +57,7 @@ ApplicationWindow{
             MenuItem {
                 text: qsTr("New")
                 shortcut: "Ctrl+L"
-                onTriggered: {
-                    historyWindow.linkEnabled = true;
-                    console.log("settingLineEnable to true");
-                }
+                onTriggered: {Line.create();}
 
             }
 
@@ -143,6 +141,8 @@ ApplicationWindow{
             property int clickCount:0
             property variant linkElement1
             property variant linkElement2
+            property int basiclineCount: 0
+            property int basiclineNameCount: 0
 
             Component.onDestruction: {
                 //Update to DATABASE
