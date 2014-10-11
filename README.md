@@ -23,8 +23,12 @@ button on QtCreator.
 
 ==People==
 -- Add multiple people to an event
-Only upto 5 people can be added to an event
+-- People can be linked to other people only via an event
 
 ==Links==
+-- Events are linked to the timeline
 -- Events can be linked to other events
--- Links are unidirectional
+
+==Properties==
+-- Both People and Events have property boxes where data may be stored
+
