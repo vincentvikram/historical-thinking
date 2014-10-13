@@ -54,9 +54,9 @@ ApplicationWindow{
         }
         Menu {
             id:linkMenu
-            title: "Link"
+            title: "Links"
             MenuItem {
-                text: qsTr("New")
+                text: qsTr("basic&Line")
                 shortcut: "Ctrl+L"
                 onTriggered: {Line.create();}
 
