@@ -20,32 +20,32 @@ ApplicationWindow{
         Menu {
             title: "File"
             MenuItem {
-                text: qsTr("Save")
+                text: qsTr("&Save")
                 shortcut: "Ctrl+S"
-                onTriggered: {dbConnector.visible = true;}
+//              onTriggered: {dbConnector.visible = true;}
             }
 
             MenuItem {
                 text: qsTr("Exit")
                 shortcut: "Ctrl+Q"
-                onTriggered: {Event.create();}
+                onTriggered: {Qt.quit();}
             }
         }
         Menu {
             title: "New"
             MenuItem {
-                text: qsTr("Timeline")
+                text: qsTr("&Timeline")
                 shortcut: "Ctrl+T"
                 onTriggered: {timelineDialog.visible = true;}
             }
 
             MenuItem {
-                text: qsTr("Event")
+                text: qsTr("&Event")
                 shortcut: "Ctrl+E"
                 onTriggered: {Event.create();}
             }
             MenuItem {
-                text: qsTr("Person")
+                text: qsTr("&Person")
                 shortcut: "Ctrl+P"
                 onTriggered: {
                     Person.create();
@@ -61,7 +61,7 @@ ApplicationWindow{
                 onTriggered: {Line.create();}
 
             }
-
+/*
             MenuItem {
                 text: qsTr("Parent & child")
                 onTriggered: {
@@ -98,18 +98,18 @@ ApplicationWindow{
                     console.log("settingLineEnable to true");
                 }
             }
-        }
+ */       }
         Menu {
             title: "Help"
             MenuItem {
                 text: qsTr("About")
-                onTriggered: {timelineDialog.visible = true;}
+ //             onTriggered: {timelineDialog.visible = true;}
             }
 
             MenuItem {
                 text: qsTr("Help is here")
-                shortcut: "F1"
-                onTriggered: {Event.create();}
+//              shortcut: "F1"
+//              onTriggered: {Event.create();}
             }
         }
     }
